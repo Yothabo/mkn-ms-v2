@@ -1,0 +1,165 @@
+/* Loading Components */
+.loading-spinner {
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+.loading-spinner--xs {
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+}
+
+.loading-spinner--sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.loading-spinner--md {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.loading-spinner--lg {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+.loading-spinner--xl {
+  width: 60px;
+  height: 60px;
+  border-width: 4px;
+}
+
+/* Loading Spinner Colors */
+.loading-spinner--primary {
+  border-top-color: var(--color-primary);
+}
+
+.loading-spinner--secondary {
+  border-top-color: var(--color-secondary);
+}
+
+.loading-spinner--accent {
+  border-top-color: var(--color-accent);
+}
+
+.loading-spinner--white {
+  border-top-color: white;
+}
+
+.loading-spinner--muted {
+  border-top-color: var(--color-text-light);
+}
+
+.loading-spinner--error {
+  border-top-color: var(--color-status-error);
+}
+
+/* Button loading state */
+.btn--loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.btn--loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  left: 50%;
+  top: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .loading::after {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+[data-theme="dark"] .loading-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-background-muted) 25%,
+    var(--color-background-subtle) 50%,
+    var(--color-background-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeleton--text {
+  height: 1em;
+}
+
+.skeleton--circle {
+  border-radius: 50%;
+}
+
+.skeleton--square {
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

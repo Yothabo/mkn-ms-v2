@@ -1,0 +1,45 @@
+/* Global scrollbar removal */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Ensure all scrollable elements inherit scrollbar hiding */
+[class*="container"],
+[class*="scroll"],
+[class*="table"],
+[class*="list"],
+[class*="modal"] {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+[class*="container"]::-webkit-scrollbar,
+[class*="scroll"]::-webkit-scrollbar,
+[class*="table"]::-webkit-scrollbar,
+[class*="list"]::-webkit-scrollbar,
+[class*="modal"]::-webkit-scrollbar {
+  display: none;
+}

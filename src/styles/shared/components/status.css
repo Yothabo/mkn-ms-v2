@@ -1,0 +1,125 @@
+/* Status Components */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--color-background);
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.status-dot--sm {
+  width: 6px;
+  height: 6px;
+  border-width: 1px;
+}
+
+.status-dot--lg {
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+
+.status-dot--xl {
+  width: 12px;
+  height: 12px;
+  border-width: 2px;
+}
+
+/* Status Colors - FIXED: Use status-preRa (capital R) to match components */
+.status-active { background: var(--color-status-active); }
+.status-preRa { background: var(--color-status-pre-ra); } /* GOLD - FIXED: status-preRa */
+.status-ra { background: var(--color-status-ra); }
+.status-inactive { background: var(--color-status-inactive); }
+.status-deceased { background: var(--color-status-deceased); }
+.status-success { background: var(--color-status-success); }
+.status-warning { background: var(--color-status-warning); } /* GOLD */
+.status-error { background: var(--color-status-error); }
+.status-info { background: var(--color-status-info); }
+
+.status-dot--active { background: var(--color-status-active); }
+.status-dot--pre-ra { background: var(--color-status-pre-ra); }
+.status-dot--ra { background: var(--color-status-ra); }
+.status-dot--inactive { background: var(--color-status-inactive); }
+.status-dot--deceased { background: var(--color-status-deceased); }
+.status-dot--success { background: var(--color-status-success); }
+.status-dot--warning { background: var(--color-status-warning); }
+.status-dot--error { background: var(--color-status-error); }
+.status-dot--info { background: var(--color-status-info); }
+
+/* Status Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.status-badge--active {
+  background: var(--color-status-active);
+  color: white;
+}
+
+.status-badge--pre-ra {
+  background: var(--color-status-pre-ra);
+  color: white;
+}
+
+.status-badge--ra {
+  background: var(--color-status-ra);
+  color: white;
+}
+
+.status-badge--inactive {
+  background: var(--color-status-inactive);
+  color: white;
+}
+
+.status-badge--deceased {
+  background: var(--color-status-deceased);
+  color: white;
+}
+
+.status-badge--outline {
+  background: transparent;
+  border: 1px solid currentColor;
+}
+
+.status-badge--outline.status-badge--active {
+  color: var(--color-status-active);
+  border-color: var(--color-status-active);
+}
+
+.status-badge--outline.status-badge--pre-ra {
+  color: var(--color-status-pre-ra);
+  border-color: var(--color-status-pre-ra);
+}
+
+.status-badge--outline.status-badge--ra {
+  color: var(--color-status-ra);
+  border-color: var(--color-status-ra);
+}
+
+/* Status Display */
+.status-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.status-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  font-weight: var(--font-weight-normal);
+}
+
+.status-description {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+  margin-top: calc(var(--spacing-xs) / 2);
+}

@@ -1,0 +1,109 @@
+/* Member Feature Layout Utilities */
+.member-grid {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.member-grid--auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.member-grid--auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.member-grid--cols-1 { grid-template-columns: 1fr; }
+.member-grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.member-grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.member-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .member-grid--cols-2,
+  .member-grid--cols-3,
+  .member-grid--cols-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .member-grid--auto-fit,
+  .member-grid--auto-fill {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Member Container */
+.member-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.member-container--full {
+  max-width: none;
+}
+
+.member-container--narrow {
+  max-width: 800px;
+}
+
+.member-container--wide {
+  max-width: 1200px;
+}
+
+/* Member Section */
+.member-section {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.member-section--flat {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.member-section--bordered {
+  border-width: 1px;
+}
+
+.member-section--elevated {
+  box-shadow: var(--shadow-sm);
+}
+
+.member-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.member-section-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.member-section-description {
+  margin: var(--spacing-xs) 0 0 0;
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.member-section-content {
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
+}
+
+.member-section-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}

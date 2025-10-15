@@ -1,0 +1,120 @@
+/* Targeted Reset - Remove Only Default Browser Styling from Clickable Elements */
+
+/* Remove focus outlines but preserve your custom focus styles */
+*:focus,
+*:focus-visible {
+  outline: none !important;
+}
+
+/* Remove default button styles but preserve your custom button classes */
+button:not([class*="btn"]):not([class*="button"]),
+input[type="button"]:not([class*="btn"]):not([class*="button"]),
+input[type="submit"]:not([class*="btn"]):not([class*="button"]), 
+input[type="reset"]:not([class*="btn"]):not([class*="button"]) {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove hover effects only from unstyled elements */
+button:not([class*="btn"]):not([class*="button"]):hover,
+input[type="button"]:not([class*="btn"]):not([class*="button"]):hover,
+input[type="submit"]:not([class*="btn"]):not([class*="button"]):hover,
+input[type="reset"]:not([class*="btn"]):not([class*="button"]):hover {
+  background: none;
+  border: none;
+}
+
+/* Remove default link styling but preserve your custom link classes */
+a:not([class*="btn"]):not([class*="button"]):not([class*="link"]) {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:not([class*="btn"]):not([class*="button"]):not([class*="link"]):hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Remove default input borders but preserve your custom form classes */
+input:not([class*="form"]):not([class*="input"]):not([class*="member-modal"]),
+textarea:not([class*="form"]):not([class*="input"]):not([class*="member-modal"]),
+select:not([class*="form"]):not([class*="input"]):not([class*="member-modal"]) {
+  border: none;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Remove focus from unstyled inputs */
+input:not([class*="form"]):not([class*="input"]):not([class*="member-modal"]):focus,
+textarea:not([class*="form"]):not([class*="input"]):not([class*="member-modal"]):focus,
+select:not([class*="form"]):not([class*="input"]):not([class*="member-modal"]):focus {
+  outline: none;
+}
+
+/* Remove default checkbox/radio styling but preserve your custom ones */
+input[type="checkbox"]:not([class*="form"]):not([class*="checkbox"]),
+input[type="radio"]:not([class*="form"]):not([class*="radio"]) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Remove tap highlight globally but preserve your custom interactions */
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove list defaults from unstyled lists */
+ul:not([class]),
+ol:not([class]) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Preserve all your custom component styles */
+[class*="btn"],
+[class*="button"],
+[class*="form"],
+[class*="input"],
+[class*="modal"],
+[class*="card"],
+[class*="member"],
+[class*="auth"],
+[class*="status"] {
+  /* Your custom styles are preserved */
+}
+
+/* Remove visited link styling */
+a:visited {
+  color: inherit;
+}
+
+/* Remove selection background but allow text selection */
+::selection {
+  background: transparent;
+}
+
+::-moz-selection {
+  background: transparent;
+}
+
+/* Ensure your custom components can still have focus when needed */
+[class*="btn"]:focus,
+[class*="button"]:focus,
+[class*="form"]:focus,
+[class*="input"]:focus,
+[class*="member-modal"]:focus {
+  /* Your custom focus styles are preserved */
+}

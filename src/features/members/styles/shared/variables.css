@@ -1,0 +1,27 @@
+/* Member Feature Specific Variables */
+:root {
+  /* Member Modal */
+  --member-modal-z-index: 1000;
+  --member-modal-backdrop-blur: 4px;
+  --member-modal-max-width: 1400px;
+  --member-modal-top-bar-height: 80px;
+  --member-modal-profile-avatar-size: 60px;
+  --member-modal-profile-avatar-offset: -30px;
+  
+  /* Member List */
+  --member-list-table-height: 60vh;
+  --member-list-controls-height: 40px;
+  --member-list-status-legend-height: 40px;
+  
+  /* Mobile Breakpoints */
+  --mobile-breakpoint: 768px;
+  --tablet-breakpoint: 1024px;
+  --desktop-breakpoint: 1025px;
+}
+/* Additional variables for dropdown theming */
+:root {
+  --color-primary-alpha: rgba(37, 99, 235, 0.1);
+  --color-primary-alpha-dark: rgba(96, 165, 250, 0.2);
+  --color-primary-light: #60a5fa;
+  --shadow-xl-dark: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}

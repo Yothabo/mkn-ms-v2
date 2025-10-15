@@ -1,0 +1,605 @@
+import React from 'react';
+import { ExtendedMember } from '../../../../../../data/mock/types';
+
+interface MemberDetailsSectionsProps {
+  viewState: string;
+  editedMember: ExtendedMember;
+  age: number | null;
+  isEligibleForCard: boolean;
+  isAddingNew: boolean;
+  isDeceased: boolean;
+  currentRAInfo: any;
+  onFieldChange: (field: string, value: string) => void;
+  onNextOfKinChange: (field: string, value: string) => void;
+}
+
+export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
+  viewState,
+  editedMember,
+  age,
+  isEligibleForCard,
+  isAddingNew,
+  isDeceased,
+  currentRAInfo,
+  onFieldChange,
+  onNextOfKinChange,
+}) => {
+  const isEditing = viewState === 'editing';
+
+  const formatDate = (dateString: string): string => {
+    if (!dateString) return 'Not provided';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
+  const getDisplayValue = (value: any, fallback: string = 'Not provided'): string => {
+    if (value === null || value === undefined || value === '') return fallback;
+    return String(value);
+  };
+
+  const calculateDuration = (startDate: string, endDate?: string): string => {
+    if (!startDate) return '';
+    const start = new Date(startDate);
+    const end = endDate ? new Date(endDate) : new Date();
+    const diffTime = Math.abs(end.getTime() - start.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 30) {
+      return `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+    } else if (diffDays < 365) {
+      const months = Math.floor(diffDays / 30);
+      return `${months} month${months !== 1 ? 's' : ''}`;
+    } else {
+      const years = Math.floor(diffDays / 365);
+      const remainingMonths = Math.floor((diffDays % 365) / 30);
+      return `${years} year${years !== 1 ? 's' : ''}${remainingMonths > 0 ? `, ${remainingMonths} month${remainingMonths !== 1 ? 's' : ''}` : ''}`;
+    }
+  };
+
+  const defaultRAHistory = [{
+    raStartDate: editedMember.dateOfEntry || new Date().toISOString().split('T')[0],
+    raEndDate: null,
+    reason: 'Initial membership'
+  }];
+
+  const raHistory = editedMember.raHistory && editedMember.raHistory.length > 0 
+    ? editedMember.raHistory 
+    : defaultRAHistory;
+
+  return (
+    <div className="member-modal-sections-container">
+      <div className="member-modal-info-container">
+        <h3 className="member-modal-section-title">Personal Information</h3>
+        <div className="member-modal-info-content">
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Name:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={editedMember.name || ''}
+                  onChange={(e) => onFieldChange('name', e.target.value)}
+                  className="member-modal-edit-input"
+                  placeholder="Enter first name"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.name)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Surname:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={editedMember.surname || ''}
+                  onChange={(e) => onFieldChange('surname', e.target.value)}
+                  className="member-modal-edit-input"
+                  placeholder="Enter surname"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.surname)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Date of Birth:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="date"
+                  value={editedMember.dateOfBirth || ''}
+                  onChange={(e) => onFieldChange('dateOfBirth', e.target.value)}
+                  className="member-modal-edit-input"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {formatDate(editedMember.dateOfBirth)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Age:</span>
+            <div className="member-modal-value-container">
+              <div className="member-modal-age">
+                {age !== null ? `${age} years` : 'Not provided'}
+              </div>
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Gender:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <select
+                  value={editedMember.gender || ''}
+                  onChange={(e) => onFieldChange('gender', e.target.value)}
+                  className="member-modal-edit-input"
+                >
+                  <option value="">Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.gender)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Phone:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="tel"
+                  value={editedMember.phone || ''}
+                  onChange={(e) => onFieldChange('phone', e.target.value)}
+                  className="member-modal-edit-input"
+                  placeholder="Enter phone number"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.phone)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Email:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="email"
+                  value={editedMember.email || ''}
+                  onChange={(e) => onFieldChange('email', e.target.value)}
+                  className="member-modal-edit-input"
+                  placeholder="Enter email address"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.email)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Physical Address:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <textarea
+                  value={editedMember.physicalAddress || ''}
+                  onChange={(e) => onFieldChange('physicalAddress', e.target.value)}
+                  className="member-modal-edit-input member-modal-textarea"
+                  placeholder="Enter physical address"
+                  rows={3}
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.physicalAddress)}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="member-modal-info-container">
+        <h3 className="member-modal-section-title">Membership Information</h3>
+        <div className="member-modal-info-content">
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Status:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <select
+                  value={editedMember.status || ''}
+                  onChange={(e) => onFieldChange('status', e.target.value)}
+                  className="member-modal-edit-input"
+                >
+                  <option value="">Select status</option>
+                  <option value="active">Active</option>
+                  <option value="pre-ra">Pre-RA</option>
+                  <option value="ra">RA</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="deceased">Deceased</option>
+                </select>
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.status)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Position:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <select
+                  value={editedMember.position || ''}
+                  onChange={(e) => onFieldChange('position', e.target.value)}
+                  className="member-modal-edit-input"
+                >
+                  <option value="">Select position</option>
+                  <option value="member">Member</option>
+                  <option value="facilitator">Facilitator</option>
+                  <option value="evangelist">Evangelist</option>
+                  <option value="messenger">Messenger</option>
+                  <option value="songster">Songster</option>
+                  <option value="steward">Steward</option>
+                  <option value="conciliator">Conciliator</option>
+                  <option value="clerk">Clerk</option>
+                </select>
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.position)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Main Branch:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <select
+                  value={editedMember.mainBranch || ''}
+                  onChange={(e) => onFieldChange('mainBranch', e.target.value)}
+                  className="member-modal-edit-input"
+                >
+                  <option value="">Select branch</option>
+                  <option value="Bulawayo">Bulawayo</option>
+                  <option value="Harare">Harare</option>
+                  <option value="Johannesburg">Johannesburg</option>
+                  <option value="Pretoria">Pretoria</option>
+                  <option value="Gaborone">Gaborone</option>
+                </select>
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.mainBranch)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Purity Status:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <select
+                  value={editedMember.purity || ''}
+                  onChange={(e) => onFieldChange('purity', e.target.value)}
+                  className="member-modal-edit-input"
+                >
+                  <option value="">Select purity status</option>
+                  <option value="virgin">Virgin</option>
+                  <option value="non-virgin">Non-Virgin</option>
+                  <option value="inapplicable">Inapplicable</option>
+                </select>
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.purity)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Spiritual Reason:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <textarea
+                  value={editedMember.spiritualReason || ''}
+                  onChange={(e) => onFieldChange('spiritualReason', e.target.value)}
+                  className="member-modal-edit-input member-modal-textarea"
+                  placeholder="Enter spiritual reason"
+                  rows={3}
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.spiritualReason)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Date of Entry:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="date"
+                  value={editedMember.dateOfEntry || ''}
+                  onChange={(e) => onFieldChange('dateOfEntry', e.target.value)}
+                  className="member-modal-edit-input"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {formatDate(editedMember.dateOfEntry)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {isEligibleForCard && (
+            <>
+              <div className="member-modal-info-row">
+                <span className="member-modal-info-label">Card Number:</span>
+                <div className="member-modal-input-container">
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={editedMember.cardNumber || ''}
+                      onChange={(e) => onFieldChange('cardNumber', e.target.value)}
+                      className="member-modal-edit-input"
+                      placeholder="Enter card number"
+                    />
+                  ) : (
+                    <div className="member-modal-field-border">
+                      {getDisplayValue(editedMember.cardNumber)}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="member-modal-info-row">
+                <span className="member-modal-info-label">Receipt Number:</span>
+                <div className="member-modal-input-container">
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={editedMember.receiptNumber || ''}
+                      onChange={(e) => onFieldChange('receiptNumber', e.target.value)}
+                      className="member-modal-edit-input"
+                      placeholder="Enter receipt number"
+                    />
+                  ) : (
+                    <div className="member-modal-field-border">
+                      {getDisplayValue(editedMember.receiptNumber)}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Last Attendance:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="date"
+                  value={editedMember.lastAttendance || ''}
+                  onChange={(e) => onFieldChange('lastAttendance', e.target.value)}
+                  className="member-modal-edit-input"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {formatDate(editedMember.lastAttendance)}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="member-modal-info-container">
+        <h3 className="member-modal-section-title">Next of Kin Information</h3>
+        <div className="member-modal-info-content">
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Name:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={editedMember.nextOfKin?.name || ''}
+                  onChange={(e) => onNextOfKinChange('name', e.target.value)}
+                  className="member-modal-edit-input"
+                  placeholder="Enter next of kin name"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.nextOfKin?.name)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Surname:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={editedMember.nextOfKin?.surname || ''}
+                  onChange={(e) => onNextOfKinChange('surname', e.target.value)}
+                  className="member-modal-edit-input"
+                  placeholder="Enter next of kin surname"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.nextOfKin?.surname)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Relationship:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <select
+                  value={editedMember.nextOfKin?.relationship || ''}
+                  onChange={(e) => onNextOfKinChange('relationship', e.target.value)}
+                  className="member-modal-edit-input"
+                >
+                  <option value="">Select relationship</option>
+                  <option value="parent">Parent</option>
+                  <option value="spouse">Spouse</option>
+                  <option value="child">Child</option>
+                  <option value="sibling">Sibling</option>
+                  <option value="other">Other</option>
+                </select>
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.nextOfKin?.relationship)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Phone:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <input
+                  type="tel"
+                  value={editedMember.nextOfKin?.phone || ''}
+                  onChange={(e) => onNextOfKinChange('phone', e.target.value)}
+                  className="member-modal-edit-input"
+                  placeholder="Enter next of kin phone"
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.nextOfKin?.phone)}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="member-modal-info-row">
+            <span className="member-modal-info-label">Address:</span>
+            <div className="member-modal-input-container">
+              {isEditing ? (
+                <textarea
+                  value={editedMember.nextOfKin?.address || ''}
+                  onChange={(e) => onNextOfKinChange('address', e.target.value)}
+                  className="member-modal-edit-input member-modal-textarea"
+                  placeholder="Enter next of kin address"
+                  rows={3}
+                />
+              ) : (
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.nextOfKin?.address)}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="member-modal-info-container">
+        <h3 className="member-modal-section-title">RA History</h3>
+        <div className="member-modal-info-content">
+          {raHistory.map((ra, index) => (
+            <div key={index} className={`member-modal-ra-history-item ${!ra.raEndDate ? 'member-modal-current-ra' : ''}`}>
+              <div className="member-modal-info-row">
+                <span className="member-modal-info-label">Start Date:</span>
+                <div className="member-modal-value-container">
+                  <div className="member-modal-field-border">
+                    {formatDate(ra.raStartDate)}
+                  </div>
+                </div>
+              </div>
+              {ra.raEndDate && (
+                <div className="member-modal-info-row">
+                  <span className="member-modal-info-label">End Date:</span>
+                  <div className="member-modal-value-container">
+                    <div className="member-modal-field-border">
+                      {formatDate(ra.raEndDate)}
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="member-modal-info-row">
+                <span className="member-modal-info-label">Duration:</span>
+                <div className="member-modal-value-container">
+                  <div className="member-modal-field-border">
+                    {calculateDuration(ra.raStartDate, ra.raEndDate)}
+                  </div>
+                </div>
+              </div>
+              {ra.reason && (
+                <div className="member-modal-info-row">
+                  <span className="member-modal-info-label">Reason:</span>
+                  <div className="member-modal-value-container">
+                    <div className="member-modal-field-border">
+                      {getDisplayValue(ra.reason)}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {isDeceased && editedMember.deceasedInfo && (
+        <div className="member-modal-info-container member-modal-deceased-info">
+          <h3 className="member-modal-section-title">Deceased Information</h3>
+          <div className="member-modal-info-content">
+            <div className="member-modal-info-row">
+              <span className="member-modal-info-label">Date of Death:</span>
+              <div className="member-modal-input-container">
+                <div className="member-modal-field-border">
+                  {formatDate(editedMember.deceasedInfo.dateOfDeath)}
+                </div>
+              </div>
+            </div>
+
+            <div className="member-modal-info-row">
+              <span className="member-modal-info-label">Cause of Death:</span>
+              <div className="member-modal-input-container">
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.deceasedInfo.causeOfDeath)}
+                </div>
+              </div>
+            </div>
+
+            <div className="member-modal-info-row">
+              <span className="member-modal-info-label">Burial Place:</span>
+              <div className="member-modal-input-container">
+                <div className="member-modal-field-border">
+                  {getDisplayValue(editedMember.deceasedInfo.burialPlace)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
