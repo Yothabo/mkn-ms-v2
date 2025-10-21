@@ -163,8 +163,7 @@ for (let i = 11; i <= 50; i++) {
     lastAttendance,
     isYouth: age >= 13 && age <= 35,
     isFemale: gender === 'female',
-    cardNumber: generateCardNumber(),
-    raHistory: []
+    cardNumber: generateCardNumber()
   };
 
   if (status === 'deceased') {
