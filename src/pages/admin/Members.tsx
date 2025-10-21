@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import MemberList from '../../features/members/components/admin/MemberList';
 import MemberDetailsModal from '../../features/members/components/admin/MemberDetailsModal';
-import { Member } from '../../config/members';
 import { ExtendedMember } from '../../data/mock/types';
 import { bulawayoMembers, harareMembers, johannesburgMembers, pretoriaMembers, gaboroneMembers } from '../../data/mock';
 
@@ -57,8 +56,8 @@ export default function Members() {
   const [showMemberModal, setShowMemberModal] = useState(false);
   const [isAddingNew, setIsAddingNew] = useState(false);
 
-  const handleMemberSelect = (member: Member) => {
-    setSelectedMember(member as ExtendedMember);
+  const handleMemberSelect = (member: ExtendedMember) => {
+    setSelectedMember(member);
     setIsAddingNew(false);
     setShowMemberModal(true);
   };

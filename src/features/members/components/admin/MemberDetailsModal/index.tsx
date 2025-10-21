@@ -8,6 +8,8 @@ import { ActionContent } from './components/ActionContent';
 import { MemberDetailsSections } from './components/MemberDetailsSections';
 import { ActionButtons } from './components/ActionButtons';
 import '../../../styles/member-details-modal.css';
+import '../../../styles/components/modal-sections.css';
+import '../../../styles/components/modal-responsive.css';
 
 // Helper function to check if member is "new" (dateOfEntry less than 3 months)
 const isNewMember = (dateOfEntry?: string): boolean => {

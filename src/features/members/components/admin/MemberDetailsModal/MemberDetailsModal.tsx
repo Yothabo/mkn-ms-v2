@@ -3,6 +3,8 @@ import { ExtendedMember } from '../../../../../data/mock/types';
 import { Edit, Close, Delete, Person, Chat, Warning, CheckCircle, Save } from '@mui/icons-material';
 import { validateMember } from '../../../../../utils/validation';
 import '../../../styles/member-details-modal.css';
+import '../../../styles/components/modal-sections.css';
+import '../../../styles/components/modal-responsive.css';
 import { MemberDetailsSections } from './components/MemberDetailsSections';
 import { ActionButtons } from './components/ActionButtons';
 import { ActionContent } from './components/ActionContent';

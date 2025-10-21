@@ -5,9 +5,18 @@ export default defineConfig({
   plugins: [react()],
   server: {
     hmr: {
-      overlay: true, // Enable error overlay
+      overlay: true,
     },
     port: 5173,
-    host: true, // Expose to network for mobile testing
+    host: true,
   },
+  build: {
+    rollupOptions: {
+      external: ['@mui/material/utils'],
+    }
+  },
+  optimizeDeps: {
+    // Remove the dependencies that aren't installed
+    include: ['@mui/icons-material'] // Only include what you actually have
+  }
 });

@@ -1,16 +1,16 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import DataTable from '../../../../shared/components/tables/DataTable';
-import { Member, MemberStatus, Position } from '../../../../config/members';
+import { ExtendedMember, MemberStatus, Position } from '../../../../config/members';
 import { FilterList, PersonAdd, Clear, Check, Search } from '@mui/icons-material';
 import MemberFiltersModal from './MemberFiltersModal';
 import '../../styles/member-styles.css';
 
 // Types
 interface MemberListProps {
-  members: Member[];
-  onMemberSelect: (member: Member) => void;
+  members: ExtendedMember[];
+  onMemberSelect: (member: ExtendedMember) => void;
   onAddMember: () => void;
-  onEditMember: (member: Member) => void;
+  onEditMember: (member: ExtendedMember) => void;
   isLoading?: boolean;
 }
 
