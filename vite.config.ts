@@ -11,12 +11,15 @@ export default defineConfig({
     host: true,
   },
   build: {
+    outDir: 'dist',
     rollupOptions: {
       external: ['@mui/material/utils'],
     }
   },
+  // Important for Vercel deployment
+  base: './',
+  // Add this for better chunking
   optimizeDeps: {
-    // Remove the dependencies that aren't installed
-    include: ['@mui/icons-material'] // Only include what you actually have
+    include: ['@mui/icons-material']
   }
 });
