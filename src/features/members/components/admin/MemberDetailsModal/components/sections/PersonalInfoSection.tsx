@@ -10,6 +10,7 @@ interface PersonalInfoSectionProps {
   age: number | null;
   onFieldChange: (field: string, value: string) => void;
   validationErrors: Record<string, string>;
+  onOpenCustomModal?: (type: string, field: string, options?: any[]) => void;
 }
 
 export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
@@ -19,10 +20,17 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
   age,
   onFieldChange,
   validationErrors,
+  onOpenCustomModal,
 }) => {
-  const renderNonEditableField = (value: any) => (
-    <div className="member-modal-field-border">{getDisplayValue(value, '—')}</div>
+  const renderNonEditableField = (value: any, fieldName?: string) => (
+    <div className="member-modal-field-border">{getDisplayValue(value, fieldName ? `No ${fieldName} provided` : '—')}</div>
   );
+
+  const genderOptions = [
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+    { value: 'other', label: 'Other' }
+  ];
 
   return (
     <>
@@ -35,14 +43,15 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               'name',
               editedMember.name || '',
               'text',
-              'Enter given name',
+              'Enter name',
               undefined,
               onFieldChange,
               validationErrors,
-              false
+              false,
+              onOpenCustomModal
             )
           ) : (
-            renderNonEditableField(editedMember.name)
+            renderNonEditableField(editedMember.name, 'name')
           )}
         </div>
       </div>
@@ -60,10 +69,11 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               undefined,
               onFieldChange,
               validationErrors,
-              false
+              false,
+              onOpenCustomModal
             )
           ) : (
-            renderNonEditableField(editedMember.surname)
+            renderNonEditableField(editedMember.surname, 'surname')
           )}
         </div>
       </div>
@@ -77,11 +87,12 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               'dateOfBirth',
               editedMember.dateOfBirth || '',
               'date',
-              '',
+              'Select date',
               undefined,
               onFieldChange,
               validationErrors,
-              false
+              false,
+              onOpenCustomModal
             )
           ) : (
             <div className="member-modal-field-border">
@@ -95,7 +106,7 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
                   )}
                 </>
               ) : (
-                '—'
+                'No date of birth'
               )}
             </div>
           )}
@@ -111,18 +122,15 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               'gender',
               editedMember.gender || '',
               'select',
-              '',
-              [
-                { value: 'male', label: 'Male' },
-                { value: 'female', label: 'Female' },
-                { value: 'other', label: 'Other' }
-              ],
+              'Select gender',
+              genderOptions,
               onFieldChange,
               validationErrors,
-              false
+              false,
+              onOpenCustomModal
             )
           ) : (
-            renderNonEditableField(capitalizeText(editedMember.gender))
+            renderNonEditableField(capitalizeText(editedMember.gender), 'gender')
           )}
         </div>
       </div>
@@ -140,10 +148,11 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               undefined,
               onFieldChange,
               validationErrors,
-              false
+              false,
+              onOpenCustomModal
             )
           ) : (
-            renderNonEditableField(editedMember.phone)
+            renderNonEditableField(editedMember.phone, 'phone')
           )}
         </div>
       </div>
@@ -161,10 +170,11 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               undefined,
               onFieldChange,
               validationErrors,
-              false
+              false,
+              onOpenCustomModal
             )
           ) : (
-            renderNonEditableField(editedMember.email)
+            renderNonEditableField(editedMember.email, 'email')
           )}
         </div>
       </div>
@@ -182,10 +192,11 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               undefined,
               onFieldChange,
               validationErrors,
-              false
+              false,
+              onOpenCustomModal
             )
           ) : (
-            renderNonEditableField(editedMember.address)
+            renderNonEditableField(editedMember.address, 'address')
           )}
         </div>
       </div>

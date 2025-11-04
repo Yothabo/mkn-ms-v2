@@ -1,0 +1,128 @@
+/* Modal Action Components */
+.member-modal-icon-button {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.member-modal-icon-button:hover {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
+  transform: scale(1.05);
+}
+
+.member-modal-chat-button:hover {
+  background: var(--color-status-info);
+  border-color: var(--color-status-info);
+}
+
+.member-modal-delete-button:hover {
+  background: var(--color-status-error);
+  border-color: var(--color-status-error);
+}
+
+.member-modal-save-button {
+  background: var(--color-status-success);
+  border-color: var(--color-status-success);
+  color: var(--color-white);
+}
+
+.member-modal-save-button:hover:not(:disabled) {
+  background: #16a34a;
+  border-color: #16a34a;
+  transform: scale(1.05);
+}
+
+.member-modal-save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.member-modal-icon-button.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.member-modal-icon-button.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.member-modal-icon-button.success {
+  background: var(--color-status-success);
+  border-color: var(--color-status-success);
+  color: var(--color-white);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.member-modal-action-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform var(--transition-normal);
+}
+
+.member-modal-icon-button:hover .member-modal-action-icon {
+  transform: scale(1.1);
+}
+
+.member-modal-cancel-button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+}
+
+.member-modal-cancel-button:hover {
+  background: var(--color-surface);
+  border-color: var(--color-text-light);
+}
+
+.member-modal-confirm-delete-button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-status-error);
+  color: var(--color-white);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+}
+
+.member-modal-confirm-delete-button:hover:not(:disabled) {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.member-modal-confirm-delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}

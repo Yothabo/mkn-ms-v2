@@ -1,0 +1,74 @@
+/* Modal Special Components */
+.member-modal-ra-history-item {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  break-inside: avoid;
+}
+
+.member-modal-ra-history-item:last-child {
+  margin-bottom: 0;
+}
+
+.member-modal-current-ra {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+}
+
+.member-modal-status-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: transparent;
+  padding: var(--spacing-xs) 0;
+}
+
+.member-modal-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--color-background);
+  flex-shrink: 0;
+}
+
+.member-modal-status-active { background: var(--color-status-active); }
+.member-modal-status-pre-ra { background: var(--color-status-pre-ra); }
+.member-modal-status-ra { background: var(--color-status-ra); }
+.member-modal-status-inactive { background: var(--color-status-inactive); }
+.member-modal-status-deceased { background: var(--color-status-deceased); }
+
+.ra-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ra-history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--color-surface);
+  border-radius: 8px;
+  border-left: 4px solid var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.ra-history-date {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.ra-history-duration {
+  color: var(--color-text-light);
+  font-size: 0.75rem;
+  background: var(--color-primary-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+}

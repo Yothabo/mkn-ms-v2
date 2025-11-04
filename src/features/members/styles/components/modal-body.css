@@ -1,0 +1,45 @@
+/* Modal Body Components */
+.member-modal-body {
+  flex: 1;
+  padding: 56px var(--spacing-lg) 32px;
+  overflow-y: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-modal-action-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  flex: 1;
+}
+
+.member-modal-action-icon-large {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.member-modal-action-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.member-modal-action-message {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xl);
+  max-width: 400px;
+  line-height: var(--line-height-relaxed);
+}
+
+.member-modal-action-buttons-group {
+  display: flex;
+  gap: var(--spacing-sm);
+}

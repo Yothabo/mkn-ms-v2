@@ -10,13 +10,13 @@ export interface MemberDetailsModalProps {
   isAddingNew?: boolean;
 }
 
-export type ViewState = 
-  | 'details' 
-  | 'delete-warning' 
-  | 'delete-loading' 
-  | 'delete-success' 
-  | 'chat' 
-  | 'editing' 
+export type ViewState =
+  | 'details'
+  | 'delete-warning'
+  | 'delete-loading'
+  | 'delete-success'
+  | 'chat'
+  | 'editing'
   | 'deceased-info';
 
 export type CustomModalType = 'date' | 'select' | null;

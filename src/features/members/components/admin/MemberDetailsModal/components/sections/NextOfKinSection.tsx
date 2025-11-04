@@ -11,6 +11,7 @@ interface NextOfKinSectionProps {
   onFieldChange: (field: string, value: string) => void;
   onNextOfKinChange: (field: string, value: string) => void;
   validationErrors: Record<string, string>;
+  onOpenCustomModal?: (type: string, field: string, options?: any[]) => void;
 }
 
 export const NextOfKinSection: React.FC<NextOfKinSectionProps> = ({
@@ -21,37 +22,37 @@ export const NextOfKinSection: React.FC<NextOfKinSectionProps> = ({
   onFieldChange,
   onNextOfKinChange,
   validationErrors,
+  onOpenCustomModal,
 }) => {
+  const renderNonEditableField = (value: any) => (
+    <div className="member-modal-field-border">{getDisplayValue(value, '—')}</div>
+  );
+
   const relationshipOptions = [
     { value: 'parent', label: 'Parent' },
     { value: 'spouse', label: 'Spouse' },
     { value: 'sibling', label: 'Sibling' },
     { value: 'child', label: 'Child' },
-    { value: 'relative', label: 'Relative' },
-    { value: 'friend', label: 'Friend' },
     { value: 'other', label: 'Other' }
   ];
-
-  const renderNonEditableField = (value: any) => (
-    <div className="member-modal-field-border">{getDisplayValue(value, '—')}</div>
-  );
 
   return (
     <>
       {/* Next of Kin Name */}
       <div className="member-modal-info-row">
-        <span className="member-modal-info-label">Name:</span>
+        <span className="member-modal-info-label">Next of Kin Name:</span>
         <div className="member-modal-input-container">
           {isEditing ? (
             renderInputField(
-              'nextOfKin.name',
+              'nokName',
               editedMember.nextOfKin?.name || '',
               'text',
-              'Enter name',
+              'Enter next of kin name',
               undefined,
               onNextOfKinChange,
               validationErrors,
-              isAddingNew
+              false,
+              onOpenCustomModal
             )
           ) : (
             renderNonEditableField(editedMember.nextOfKin?.name)
@@ -61,18 +62,19 @@ export const NextOfKinSection: React.FC<NextOfKinSectionProps> = ({
 
       {/* Next of Kin Surname */}
       <div className="member-modal-info-row">
-        <span className="member-modal-info-label">Surname:</span>
+        <span className="member-modal-info-label">Next of Kin Surname:</span>
         <div className="member-modal-input-container">
           {isEditing ? (
             renderInputField(
-              'nextOfKin.surname',
+              'nokSurname',
               editedMember.nextOfKin?.surname || '',
               'text',
-              'Enter surname',
+              'Enter next of kin surname',
               undefined,
               onNextOfKinChange,
               validationErrors,
-              isAddingNew
+              false,
+              onOpenCustomModal
             )
           ) : (
             renderNonEditableField(editedMember.nextOfKin?.surname)
@@ -86,37 +88,37 @@ export const NextOfKinSection: React.FC<NextOfKinSectionProps> = ({
         <div className="member-modal-input-container">
           {isEditing ? (
             renderInputField(
-              'nextOfKin.relationship',
+              'nokRelationship',
               editedMember.nextOfKin?.relationship || '',
               'select',
               'Select relationship',
               relationshipOptions,
               onNextOfKinChange,
               validationErrors,
-              isAddingNew
+              false,
+              onOpenCustomModal
             )
           ) : (
-            <div className="member-modal-field-border">
-              {capitalizeText(getDisplayValue(editedMember.nextOfKin?.relationship, '—'))}
-            </div>
+            renderNonEditableField(capitalizeText(editedMember.nextOfKin?.relationship))
           )}
         </div>
       </div>
 
-      {/* Phone */}
+      {/* Next of Kin Phone */}
       <div className="member-modal-info-row">
-        <span className="member-modal-info-label">Phone:</span>
+        <span className="member-modal-info-label">Next of Kin Phone:</span>
         <div className="member-modal-input-container">
           {isEditing ? (
             renderInputField(
-              'nextOfKin.phone',
+              'nokPhone',
               editedMember.nextOfKin?.phone || '',
               'tel',
-              'Enter phone number',
+              'Enter next of kin phone',
               undefined,
               onNextOfKinChange,
               validationErrors,
-              isAddingNew
+              false,
+              onOpenCustomModal
             )
           ) : (
             renderNonEditableField(editedMember.nextOfKin?.phone)
@@ -124,20 +126,21 @@ export const NextOfKinSection: React.FC<NextOfKinSectionProps> = ({
         </div>
       </div>
 
-      {/* Address */}
+      {/* Next of Kin Address */}
       <div className="member-modal-info-row">
-        <span className="member-modal-info-label">Address:</span>
+        <span className="member-modal-info-label">Next of Kin Address:</span>
         <div className="member-modal-input-container">
           {isEditing ? (
             renderInputField(
-              'nextOfKin.address',
+              'nokAddress',
               editedMember.nextOfKin?.address || '',
-              'textarea',
-              'Enter address',
+              'text',
+              'Enter next of kin address',
               undefined,
               onNextOfKinChange,
               validationErrors,
-              isAddingNew
+              false,
+              onOpenCustomModal
             )
           ) : (
             renderNonEditableField(editedMember.nextOfKin?.address)

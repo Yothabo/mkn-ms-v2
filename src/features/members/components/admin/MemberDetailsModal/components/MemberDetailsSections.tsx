@@ -19,6 +19,7 @@ interface MemberDetailsSectionsProps {
   onFieldChange: (field: string, value: string) => void;
   onNextOfKinChange: (field: string, value: string) => void;
   validationErrors: Record<string, string>;
+  onOpenCustomModal?: (type: string, field: string, options?: any[]) => void;
 }
 
 export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
@@ -32,6 +33,7 @@ export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
   onFieldChange,
   onNextOfKinChange,
   validationErrors,
+  onOpenCustomModal,
 }) => {
   const isEditing = viewState === 'editing';
 
@@ -48,6 +50,7 @@ export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
             age={age}
             onFieldChange={onFieldChange}
             validationErrors={validationErrors}
+            onOpenCustomModal={onOpenCustomModal}
           />
         </div>
       </div>
@@ -66,6 +69,7 @@ export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
             isDeceased={isDeceased}
             onFieldChange={onFieldChange}
             validationErrors={validationErrors}
+            onOpenCustomModal={onOpenCustomModal}
           />
         </div>
       </div>
@@ -83,6 +87,7 @@ export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
               isAddingNew={isAddingNew}
               onFieldChange={onFieldChange}
               validationErrors={validationErrors}
+              onOpenCustomModal={onOpenCustomModal}
             />
           </div>
         </div>
@@ -100,6 +105,7 @@ export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
             onFieldChange={onFieldChange}
             onNextOfKinChange={onNextOfKinChange}
             validationErrors={validationErrors}
+            onOpenCustomModal={onOpenCustomModal}
           />
         </div>
       </div>
@@ -117,12 +123,13 @@ export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
               currentRAInfo={currentRAInfo}
               onFieldChange={onFieldChange}
               validationErrors={validationErrors}
+              onOpenCustomModal={onOpenCustomModal}
             />
           </div>
         </div>
       )}
 
-      {/* RA History Section - NOW WITH ORIGINAL STYLING */}
+      {/* RA History Section */}
       {!isAddingNew && (
         <div className="member-modal-info-container">
           <h3 className="member-modal-section-title">RA History</h3>
@@ -135,6 +142,7 @@ export const MemberDetailsSections: React.FC<MemberDetailsSectionsProps> = ({
               currentRAInfo={currentRAInfo}
               onFieldChange={onFieldChange}
               validationErrors={validationErrors}
+              onOpenCustomModal={onOpenCustomModal}
             />
           </div>
         </div>
