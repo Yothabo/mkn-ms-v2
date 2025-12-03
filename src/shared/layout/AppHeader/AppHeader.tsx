@@ -30,9 +30,9 @@ export default function AppHeader({
         {/* Logo on the left */}
         <div className={styles.leftSection}>
           <div className={styles.logoContainer}>
-            <img 
-              src="/src/assets/MKN.png" 
-              alt="MKN Logo" 
+            <img
+              src="/MKN.png"
+              alt="MKN Logo"
               className={styles.logo}
             />
           </div>

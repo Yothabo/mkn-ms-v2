@@ -1,194 +1,126 @@
+/* Import and compose from components */
+/* Page layout */
 .membersPage {
   padding: 0;
   max-width: 100%;
   margin: 0 auto;
 }
 
-.desktopTableContainer,
+/* Desktop table composition */
+.desktopTableContainer {
+  composes: tableContainer from './components/DesktopTable.css';
+}
+
+.desktopTable {
+  composes: table from './components/DesktopTable.css';
+}
+
+/* Mobile table composition */
 .mobileTableContainer {
-  width: 100%;
-  overflow-x: auto;
+  composes: tableContainer from './components/MobileTable.css';
 }
 
-.membersTable {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Desktop Table Styles */
-.desktopTable tbody tr {
-  border-bottom: 1px solid var(--color-border);
-  transition: background-color var(--transition-fast);
-}
-
-.desktopTable tbody tr:hover {
-  background: color-mix(in srgb, var(--color-secondary) 5%, transparent);
-}
-
-.desktopTable td {
-  padding: var(--spacing-md) var(--spacing-sm);
-  vertical-align: middle;
-  border: none;
-}
-
-/* Left align all table cells */
-.leftAlign {
-  text-align: left !important;
-}
-
-/* Status dot styles - larger size */
-.statusDot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: var(--spacing-sm);
-  flex-shrink: 0;
-}
-
-.nameWithStatus {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  text-align: left;
-}
-
-/* Mobile Table Styles */
 .mobileTable {
-  display: none;
+  composes: table from './components/MobileTable.css';
 }
 
-.mobileTable td {
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--color-border);
-  vertical-align: top;
-}
-
+/* Mobile specific components */
 .mobileName {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  text-align: left;
+  composes: mobileNameColumn from './components/MobileTable.css';
 }
 
 .memberFullName {
-  font-weight: var(--font-weight-semibold);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+  composes: nameHeader from './components/MobileTable.css';
 }
 
 .memberCardMobile {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-light);
+  composes: cardId from './components/MobileTable.css';
 }
 
 .mobileContact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  text-align: left;
+  composes: mobileContactColumn from './components/MobileTable.css';
 }
 
 .memberPhoneMobile {
-  font-weight: var(--font-weight-medium);
+  composes: phoneNumber from './components/MobileTable.css';
 }
 
 .memberEmailMobile {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-light);
+  composes: email from './components/MobileTable.css';
 }
 
 .mobileBranch {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  text-align: left;
+  composes: mobileBranchColumn from './components/MobileTable.css';
 }
 
 .memberBranchMobile {
-  font-weight: var(--font-weight-medium);
+  composes: branchName from './components/MobileTable.css';
 }
 
 .memberPositionMobile {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-light);
+  composes: position from './components/MobileTable.css';
 }
 
-/* Data Protection Disclaimer */
+/* Shared components */
+.statusDot {
+  composes: statusIndicator from './components/TableBase.css';
+}
+
+.nameWithStatus {
+  composes: nameStatusWrapper from './components/TableBase.css';
+}
+
+.leftAlign {
+  composes: textLeft from './components/TableBase.css';
+}
+
+/* Disclaimer component */
 .disclaimer {
-  margin-top: var(--spacing-2xl);
-  padding: var(--spacing-lg);
-  background: color-mix(in srgb, var(--color-status-info) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-status-info) 30%, transparent);
-  border-radius: var(--radius-lg);
-  text-align: left;
+  composes: disclaimerContainer from './components/Disclaimer.css';
 }
 
 .disclaimerContent h4 {
-  margin: 0 0 var(--spacing-sm) 0;
-  color: var(--color-status-info);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+  composes: disclaimerTitle from './components/Disclaimer.css';
 }
 
 .disclaimerContent p {
-  margin: 0;
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
-  line-height: 1.5;
+  composes: disclaimerText from './components/Disclaimer.css';
 }
 
-/* Responsive Design */
+/* Apply responsive styles */
 @media (max-width: 768px) {
   .desktopTable {
-    display: none;
+    composes: hideOnTablet from './components/Responsive.css';
   }
-
+  
   .mobileTable {
-    display: table;
+    composes: showOnTablet from './components/Responsive.css';
   }
-
-  .mobileTable td {
-    padding: var(--spacing-md);
-  }
-
+  
   .statusDot {
-    width: 10px;
-    height: 10px;
+    composes: responsiveStatusDot from './components/Responsive.css';
   }
 }
 
 @media (max-width: 480px) {
   .mobileTable td {
-    padding: var(--spacing-sm);
+    composes: mobilePadding from './components/Responsive.css';
   }
-
+  
   .statusDot {
-    width: 8px;
-    height: 8px;
+    composes: smallStatusDot from './components/Responsive.css';
   }
-
+  
   .disclaimer {
-    padding: var(--spacing-md);
-    margin-top: var(--spacing-xl);
+    composes: compactDisclaimer from './components/Responsive.css';
   }
 }
 
-/* Ensure all content is left-aligned */
+/* Ensure text alignment */
 .membersTable td,
 .mobileName,
 .mobileContact,
 .mobileBranch,
 .disclaimerContent {
-  text-align: left;
-}
-
-/* Add these for temporary placeholder */
-.tempHidden {
-  display: none !important;
+  composes: textLeft from './components/TableBase.css';
 }

@@ -1,0 +1,6 @@
+/* Box sizing utilities */
+.searchInput,
+.filterButton,
+.addButton {
+  box-sizing: border-box;
+}
