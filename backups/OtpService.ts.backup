@@ -1,0 +1,283 @@
+import { VerificationRequest, VerificationResponse, VerifyOtpRequest, VerifyOtpResponse } from '../types/verification';
+import { MockMemberData } from './verificationServiceData';
+
+let otpStore: {
+  [key: string]: {
+    otp: string;
+    expiresAt: number;
+    contact: string;
+    attempts: number;
+    cardReceiptNumber: string;
+  }
+} = {};
+
+class ProfileLockManager {
+  private readonly STORAGE_KEY = 'mkn_profile_locks';
+  private readonly OTP_REQUESTS_KEY = 'mkn_otp_requests';
+  private readonly LOCK_DURATION = 60 * 60 * 1000; // 1 hour
+  private readonly MAX_OTP_REQUESTS = 3;
+
+  isProfileLocked(profileNumber: string): boolean {
+    const locks = this.getLocks();
+    const lock = locks[profileNumber];
+
+    if (lock && lock.lockUntil > Date.now()) {
+      return true;
+    }
+
+    // Clean up expired lock and reset request count
+    if (lock && lock.lockUntil <= Date.now()) {
+      console.log(`ProfileLockManager - Lock expired for ${profileNumber}, resetting`);
+      this.removeLock(profileNumber);
+      this.resetOtpRequests(profileNumber);
+    }
+
+    return false;
+  }
+
+  getLockMessage(profileNumber: string): string {
+    const locks = this.getLocks();
+    const lock = locks[profileNumber];
+
+    if (lock && lock.lockUntil > Date.now()) {
+      const timeLeft = Math.ceil((lock.lockUntil - Date.now()) / 1000 / 60);
+      return `This profile has been locked due to too many verification attempts. Please try again in ${timeLeft} minutes.`;
+    }
+
+    return '';
+  }
+
+  recordOtpRequest(profileNumber: string): number {
+    const requests = this.getOtpRequests();
+    const currentCount = (requests[profileNumber] || 0) + 1;
+
+    console.log(`ProfileLockManager - OTP Request ${currentCount}/${this.MAX_OTP_REQUESTS} for profile ${profileNumber}`);
+
+    // If this is the 3rd OTP request, lock the profile
+    if (currentCount >= this.MAX_OTP_REQUESTS) {
+      this.lockProfile(profileNumber);
+    }
+
+    requests[profileNumber] = currentCount;
+    this.saveOtpRequests(requests);
+
+    return currentCount;
+  }
+
+  getOtpRequestCount(profileNumber: string): number {
+    const requests = this.getOtpRequests();
+    return requests[profileNumber] || 0;
+  }
+
+  lockProfile(profileNumber: string): void {
+    const locks = this.getLocks();
+    locks[profileNumber] = {
+      lockUntil: Date.now() + this.LOCK_DURATION
+    };
+    console.log(`ProfileLockManager - PROFILE ${profileNumber} LOCKED for 1 hour`);
+    this.saveLocks(locks);
+  }
+
+  resetProfile(profileNumber: string): void {
+    this.removeLock(profileNumber);
+    this.resetOtpRequests(profileNumber);
+  }
+
+  private getLocks(): { [profileNumber: string]: { lockUntil: number } } {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  }
+
+  private saveLocks(locks: { [profileNumber: string]: { lockUntil: number } }): void {
+    try {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(locks));
+    } catch (error) {
+      console.error('Failed to save profile locks:', error);
+    }
+  }
+
+  private removeLock(profileNumber: string): void {
+    const locks = this.getLocks();
+    delete locks[profileNumber];
+    this.saveLocks(locks);
+  }
+
+  private getOtpRequests(): { [profileNumber: string]: number } {
+    try {
+      const stored = localStorage.getItem(this.OTP_REQUESTS_KEY);
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  }
+
+  private saveOtpRequests(requests: { [profileNumber: string]: number }): void {
+    try {
+      localStorage.setItem(this.OTP_REQUESTS_KEY, JSON.stringify(requests));
+    } catch (error) {
+      console.error('Failed to save OTP requests:', error);
+    }
+  }
+
+  private resetOtpRequests(profileNumber: string): void {
+    const requests = this.getOtpRequests();
+    delete requests[profileNumber];
+    this.saveOtpRequests(requests);
+    console.log(`ProfileLockManager - Reset OTP requests for ${profileNumber}`);
+  }
+}
+
+const profileLockManager = new ProfileLockManager();
+
+export class OtpService {
+  private mockMemberData = new MockMemberData();
+  private readonly MAX_OTP_ATTEMPTS = 3;
+
+  generateAndSendOtp(data: VerificationRequest, member: any): VerificationResponse {
+    console.log('OTP Service - Generating OTP for profile:', data.cardReceiptNumber);
+
+    // Check if profile is locked - if locked, throw error silently (no alert)
+    if (profileLockManager.isProfileLocked(data.cardReceiptNumber)) {
+      const message = profileLockManager.getLockMessage(data.cardReceiptNumber);
+      console.log('OTP Service - PROFILE IS LOCKED, blocking OTP silently');
+      throw new Error(message);
+    }
+
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresIn = 1 * 60 * 1000;
+    const expiresAt = Date.now() + expiresIn;
+
+    const contact = data.method === 'email' ? member.email : member.phone;
+    const maskedContact = this.mockMemberData.maskContact(contact, data.method);
+
+    // Record this OTP request (this will automatically lock on 3rd request)
+    const newRequestCount = profileLockManager.recordOtpRequest(data.cardReceiptNumber);
+
+    const key = `${member.cardReceiptNumber}-${data.method}`;
+    otpStore[key] = {
+      otp,
+      expiresAt,
+      contact,
+      attempts: 0,
+      cardReceiptNumber: data.cardReceiptNumber
+    };
+
+    // ALWAYS SHOW OTP ALERT FOR TESTING - even if profile gets locked after this request
+    setTimeout(() => {
+      alert(`TEST OTP for ${member.firstName} ${member.lastName}: ${otp}\n\nThis would be sent to: ${maskedContact}\n\nCode expires in 1 minute.\n\nOTP Request: ${newRequestCount}/3`);
+    }, 500);
+
+    return {
+      success: true,
+      message: `OTP sent to your ${data.method}`,
+      maskedContact,
+      expiresIn: expiresIn / 1000
+    };
+  }
+
+  verifyOtpAndGetUser(data: VerifyOtpRequest): VerifyOtpResponse {
+    console.log('OTP Service - Verifying OTP');
+
+    let foundKey: string | null = null;
+    let foundOtp: any = null;
+
+    for (const key in otpStore) {
+      if (key.endsWith(data.method)) {
+        foundKey = key;
+        foundOtp = otpStore[key];
+        break;
+      }
+    }
+
+    if (!foundKey || !foundOtp) {
+      return {
+        success: false,
+        message: 'Verification failed',
+        user: undefined,
+        token: undefined
+      };
+    }
+
+    const { otp, expiresAt, contact, attempts, cardReceiptNumber } = foundOtp;
+
+    if (Date.now() > expiresAt) {
+      delete otpStore[foundKey];
+      throw new Error('OTP has expired. Please request a new one.');
+    }
+
+    if (attempts >= this.MAX_OTP_ATTEMPTS) {
+      delete otpStore[foundKey];
+
+      // Lock the profile when "Verification failed. You have used all available attempts"
+      console.log('OTP Service - Maximum OTP attempts reached, locking profile:', cardReceiptNumber);
+      profileLockManager.lockProfile(cardReceiptNumber);
+
+      throw new Error('Verification failed. You have used all available attempts. Please contact support.');
+    }
+
+    if (otp === data.otp) {
+      const member = this.mockMemberData.findMemberByContact(contact, data.method);
+      if (!member) {
+        throw new Error('Member verification failed. Please try again.');
+      }
+
+      // Reset profile lock on successful verification
+      profileLockManager.resetProfile(member.cardReceiptNumber);
+      console.log('OTP Service - Profile lock reset on successful verification');
+
+      return {
+        success: true,
+        message: 'Verification successful',
+        user: {
+          id: member.cardReceiptNumber,
+          email: member.email,
+          fullName: `${member.firstName} ${member.lastName}`,
+          branch: member.branch,
+          role: 'member'
+        },
+        token: `mock-jwt-token-${member.cardReceiptNumber}`
+      };
+    } else {
+      otpStore[foundKey].attempts += 1;
+      const remainingAttempts = this.MAX_OTP_ATTEMPTS - otpStore[foundKey].attempts;
+
+      if (remainingAttempts > 0) {
+        throw new Error(`Invalid OTP code. ${remainingAttempts} attempt${remainingAttempts > 1 ? 's' : ''} remaining.`);
+      } else {
+        // This will trigger the lock in the condition above
+        throw new Error('Too many incorrect attempts. Please request a new code.');
+      }
+    }
+  }
+
+  cleanupExpiredOtps() {
+    const now = Date.now();
+    Object.keys(otpStore).forEach(key => {
+      if (otpStore[key].expiresAt < now) {
+        delete otpStore[key];
+      }
+    });
+  }
+
+  canResendOtp(cardReceiptNumber: string): { canResend: boolean; message?: string } {
+    this.cleanupExpiredOtps();
+
+    if (profileLockManager.isProfileLocked(cardReceiptNumber)) {
+      return {
+        canResend: false,
+        message: profileLockManager.getLockMessage(cardReceiptNumber)
+      };
+    }
+
+    return { canResend: true };
+  }
+
+  resetProfileLock(cardReceiptNumber: string) {
+    profileLockManager.resetProfile(cardReceiptNumber);
+  }
+}

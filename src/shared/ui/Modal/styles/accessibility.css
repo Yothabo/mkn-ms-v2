@@ -1,0 +1,7 @@
+.modalOverlay {
+  isolation: isolate;
+}
+
+body.modal-open {
+  overflow: hidden;
+}

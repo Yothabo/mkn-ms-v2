@@ -1,0 +1,76 @@
+/* Verification Modal OTP Layout Styles */
+.otpVerification {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: var(--spacing-xl);
+}
+
+.otpSentMessage {
+  text-align: center;
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.successIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.successIcon svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-success);
+}
+
+.otpSentMessage h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.otpSentText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  padding: 0 var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.maskedContact {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.otpForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+}
+
+.otpInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.otpLabel {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  text-align: center;
+  line-height: var(--line-height-normal);
+  padding: 0 var(--spacing-sm);
+}

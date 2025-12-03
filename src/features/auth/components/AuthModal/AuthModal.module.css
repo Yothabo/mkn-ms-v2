@@ -1,0 +1,5 @@
+/* AuthModal Styles - Single Source of Truth for all Auth Forms */
+
+/* Import split styles */
+@import './AuthModal.base.css';
+@import './AuthModal.components.css';

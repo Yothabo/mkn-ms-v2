@@ -1,0 +1,140 @@
+/* AuthModal Component Styles - Terms, States, Checkboxes */
+
+/* Import split styles */
+@import './AuthModal.checkboxes.css';
+@import './AuthModal.terms.css';
+@import './AuthModal.states.css';
+
+/* Responsive styles for components */
+@media (max-width: 768px) {
+  /* Adjust checkbox size for mobile */
+  .authRememberMe input[type="checkbox"] + span,
+  .authTermsAgreement input[type="checkbox"] + span {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  .authRememberMe input[type="checkbox"]:checked + span::before,
+  .authTermsAgreement input[type="checkbox"]:checked + span::before,
+  .authRememberMe:hover input[type="checkbox"]:checked + span::before,
+  .authTermsAgreement:hover input[type="checkbox"]:checked + span::before {
+    font-size: 0.75rem;
+  }
+
+  /* Terms responsive */
+  .termsContent {
+    padding: var(--spacing-lg);
+  }
+
+  .termsSection {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+  }
+
+  .termsSection h4 {
+    font-size: var(--font-size-sm);
+  }
+
+  .termsSection p {
+    font-size: var(--font-size-xs);
+    padding-left: var(--spacing-sm);
+  }
+
+  .termsSection ul {
+    font-size: var(--font-size-xs);
+    margin-left: var(--spacing-lg);
+    width: calc(100% - var(--spacing-lg));
+    padding-left: var(--spacing-md);
+    border-left-width: 1px;
+  }
+
+  .termsSection li {
+    font-size: var(--font-size-xs);
+    padding-left: var(--spacing-xs);
+    line-height: 1.4;
+  }
+
+  .termsSection li::before {
+    left: calc(-1 * var(--spacing-md) - 1px);
+    width: var(--spacing-sm);
+    height: 1px;
+  }
+
+  /* Success/Error states responsive */
+  .successState,
+  .errorState {
+    padding: var(--spacing-xl);
+    gap: var(--spacing-lg);
+  }
+
+  .successTitle,
+  .errorTitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .successText,
+  .errorText {
+    font-size: var(--font-size-sm);
+  }
+
+  .successActions,
+  .errorActions {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .termsContent {
+    padding: var(--spacing-md);
+  }
+
+  .termsSection {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+  }
+
+  .termsSection ul {
+    margin-left: var(--spacing-md);
+    width: calc(100% - var(--spacing-md));
+    padding-left: var(--spacing-sm);
+  }
+
+  .termsSection li {
+    padding-left: var(--spacing-xs);
+  }
+
+  .termsSection li::before {
+    left: calc(-1 * var(--spacing-sm) - 1px);
+    width: var(--spacing-xs);
+  }
+
+  .successState,
+  .errorState {
+    padding: var(--spacing-lg);
+  }
+
+  .successIconLarge svg,
+  .errorIconLarge svg {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Desktop specific indentation */
+@media (min-width: 769px) {
+  .termsSection ul {
+    margin-left: var(--spacing-2xl);
+    width: calc(100% - var(--spacing-2xl));
+    padding-left: var(--spacing-xl);
+  }
+
+  .termsSection li {
+    padding-left: var(--spacing-md);
+  }
+
+  .termsSection li::before {
+    left: calc(-1 * var(--spacing-xl) - 1px);
+    width: var(--spacing-lg);
+  }
+}

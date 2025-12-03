@@ -1,0 +1,6 @@
+/* RegisterForm Styles - Self Contained */
+
+/* Import split styles */
+@import './RegisterForm.layout.css';
+@import './RegisterForm.components.css';
+@import './RegisterForm.responsive.css';

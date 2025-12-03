@@ -1,9 +1,7 @@
 import {
+  __commonJS,
   require_react
-} from "./chunk-L2H5Y3CP.js";
-import {
-  __commonJS
-} from "./chunk-UXIASGQL.js";
+} from "./chunk-Q34MU4L5.js";
 
 // node_modules/react/cjs/react-jsx-dev-runtime.development.js
 var require_react_jsx_dev_runtime_development = __commonJS({

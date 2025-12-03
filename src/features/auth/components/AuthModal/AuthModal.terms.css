@@ -1,0 +1,82 @@
+/* AuthModal Terms Content Styles */
+
+/* Terms content styles - TREE-LIKE INDENTATION */
+.termsContent {
+  padding: var(--spacing-xl);
+  height: 100%;
+  overflow-y: auto;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.termsSection {
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-lg);
+}
+
+.termsSection h4 {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  padding-left: 0;
+}
+
+.termsSection p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  line-height: 1.5;
+  padding-left: var(--spacing-md);
+}
+
+.termsSection ul {
+  color: var(--color-text-light);
+  margin-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  display: block;
+  width: calc(100% - var(--spacing-xl));
+  padding-left: 0;
+  list-style-position: outside;
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--spacing-lg);
+}
+
+.termsSection li {
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  padding-left: var(--spacing-sm);
+  line-height: 1.5;
+  position: relative;
+}
+
+.termsSection li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--spacing-lg) - 1px);
+  top: 0.5rem;
+  width: var(--spacing-md);
+  height: 2px;
+  background: var(--color-border);
+}
+
+.termsSection ul {
+  list-style-type: disc;
+}
+
+.termsSection li::marker {
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+}

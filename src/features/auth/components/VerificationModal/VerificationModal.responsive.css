@@ -1,0 +1,135 @@
+/* Verification Modal Responsive Styles */
+
+@media (max-width: 768px) {
+  .verificationModalContent {
+    padding: var(--spacing-xl);
+    justify-content: center;
+    min-height: 350px;
+  }
+
+  .methodSelection,
+  .otpVerification,
+  .successState,
+  .errorState,
+  .sendingState {
+    max-width: 100%;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+  }
+
+  .methodButton {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+
+  .methodIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .methodIcon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .otpInput {
+    height: 3rem;
+    font-size: var(--font-size-base);
+    padding: var(--spacing-md);
+  }
+
+  .successIcon svg,
+  .errorIconLarge svg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .instruction h2,
+  .otpSentMessage h2,
+  .successState h2,
+  .errorTitle,
+  .sendingState h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .verifyButton,
+  .retryButton,
+  .resendButton {
+    min-height: 2.75rem;
+  }
+
+  .instruction,
+  .methodButtons,
+  .otpSentMessage,
+  .otpForm,
+  .otpLabel,
+  .timer,
+  .otpActions,
+  .errorActions {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .verificationModalContent {
+    padding: var(--spacing-lg);
+    min-height: 300px;
+  }
+
+  .methodSelection,
+  .otpVerification,
+  .successState,
+  .errorState,
+  .sendingState {
+    padding: var(--spacing-md);
+  }
+
+  .methodButtons {
+    gap: var(--spacing-sm);
+  }
+
+  .methodButton {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .methodInfo h4 {
+    font-size: var(--font-size-sm);
+  }
+
+  .methodInfo p {
+    font-size: var(--font-size-xs);
+  }
+
+  .otpInput {
+    height: 2.75rem;
+    font-size: var(--font-size-base);
+    letter-spacing: 0.25em;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .verifyButton,
+  .retryButton,
+  .resendButton {
+    min-height: 2.75rem;
+  }
+
+  .instruction p,
+  .otpSentText,
+  .successState p,
+  .errorText,
+  .sendingState p {
+    font-size: var(--font-size-sm);
+  }
+
+  .instruction,
+  .methodButtons,
+  .otpSentMessage,
+  .otpForm,
+  .otpLabel,
+  .timer,
+  .otpActions,
+  .errorActions {
+    padding: 0 var(--spacing-xs);
+  }
+}

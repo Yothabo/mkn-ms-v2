@@ -1,0 +1,87 @@
+/* Targeted Reset - Remove Default Browser Styling from Clickable Elements */
+
+*:focus,
+*:focus-visible {
+  outline: none !important;
+}
+
+button:not([class*='btn']):not([class*='button']),
+input[type='button']:not([class*='btn']):not([class*='button']),
+input[type='submit']:not([class*='btn']):not([class*='button']),
+input[type='reset']:not([class*='btn']):not([class*='button']) {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not([class*='btn']):not([class*='button']):hover,
+input[type='button']:not([class*='btn']):not([class*='button']):hover,
+input[type='submit']:not([class*='btn']):not([class*='button']):hover,
+input[type='reset']:not([class*='btn']):not([class*='button']):hover {
+  background: none;
+  border: none;
+}
+
+a:not([class*='btn']):not([class*='button']):not([class*='link']) {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:not([class*='btn']):not([class*='button']):not([class*='link']):hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+input:not([class*='form']):not([class*='input']):not([class*='member-modal']),
+textarea:not([class*='form']):not([class*='input']):not([class*='member-modal']),
+select:not([class*='form']):not([class*='input']):not([class*='member-modal']) {
+  border: none;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input:not([class*='form']):not([class*='input']):not([class*='member-modal']):focus,
+textarea:not([class*='form']):not([class*='input']):not([class*='member-modal']):focus,
+select:not([class*='form']):not([class*='input']):not([class*='member-modal']):focus {
+  outline: none;
+}
+
+input[type='checkbox']:not([class*='form']):not([class*='checkbox']),
+input[type='radio']:not([class*='form']):not([class*='radio']) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+ul:not([class]),
+ol:not([class]) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a:visited {
+  color: inherit;
+}
+
+::selection {
+  background: transparent;
+}
+
+::-moz-selection {
+  background: transparent;
+}

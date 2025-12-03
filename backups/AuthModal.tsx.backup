@@ -1,0 +1,370 @@
+import React, { useState } from 'react';
+import { useAuth } from '../../../../shared/context/AuthContext';
+import { LoginForm } from '../LoginForm/LoginForm';
+import RegisterForm from '../RegisterForm/RegisterForm';
+import { ForgotPassword } from '../ForgotPassword/ForgotPassword';
+import { Modal } from '../../../../shared/ui/Modal/Modal';
+import { IoCheckmarkCircle } from 'react-icons/io5';
+
+// Import single source of truth styles
+import styles from './AuthModal.module.css';
+
+interface AuthModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  defaultView?: 'login' | 'register' | 'forgot-password';
+}
+
+type AuthView = 'login' | 'register' | 'forgot-password' | 'terms' | 'register-success' | 'forgot-password-success';
+
+export const AuthModal: React.FC<AuthModalProps> = ({
+  isOpen,
+  onClose,
+  defaultView = 'login'
+}) => {
+  const { login } = useAuth();
+  const [currentView, setCurrentView] = useState<AuthView>(defaultView);
+  const [registerFormData, setRegisterFormData] = useState({ cardReceiptNumber: '', password: '' });
+  const [forgotPasswordFormData, setForgotPasswordFormData] = useState({ cardReceiptNumber: '', newPassword: '' });
+
+  const handleSwitchToLogin = () => {
+    setCurrentView('login');
+  };
+
+  const handleSwitchToRegister = () => {
+    setCurrentView('register');
+  };
+
+  const handleSwitchToForgotPassword = () => {
+    setCurrentView('forgot-password');
+  };
+
+  const handleSwitchToTerms = () => {
+    setCurrentView('terms');
+  };
+
+  const handleClose = () => {
+    setCurrentView(defaultView);
+    setRegisterFormData({ cardReceiptNumber: '', password: '' });
+    setForgotPasswordFormData({ cardReceiptNumber: '', newPassword: '' });
+    onClose();
+  };
+
+  // Create a function that ONLY closes the verification modal without changing AuthModal view
+  const handleVerificationModalClose = () => {
+    // This function does nothing to the AuthModal state
+    // It only tells the RegisterForm to hide the verification modal
+    console.log('Verification modal closed - not affecting AuthModal view');
+  };
+
+  const handleRegisterSuccess = (formData: { cardReceiptNumber: string; password: string }) => {
+    setRegisterFormData(formData);
+    setCurrentView('register-success');
+  };
+
+  const handleForgotPasswordSuccess = (formData: { cardReceiptNumber: string; newPassword: string }) => {
+    setForgotPasswordFormData(formData);
+    setCurrentView('forgot-password-success');
+  };
+
+  const handleContinueToApp = async () => {
+    try {
+      let loginSuccess = false;
+      
+      if (currentView === 'register-success') {
+        // Login with registration credentials
+        loginSuccess = await login(registerFormData.cardReceiptNumber, registerFormData.password);
+      } else if (currentView === 'forgot-password-success') {
+        // Login with new password credentials
+        loginSuccess = await login(forgotPasswordFormData.cardReceiptNumber, forgotPasswordFormData.newPassword);
+      }
+
+      if (loginSuccess) {
+        console.log('User logged in successfully');
+        handleClose();
+        console.log('Navigating to main app...');
+      } else {
+        console.error('Login failed');
+        handleClose();
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      handleClose();
+    }
+  };
+
+  const getModalTitle = () => {
+    switch (currentView) {
+      case 'login':
+        return 'Sign In';
+      case 'register':
+        return 'Create Account';
+      case 'forgot-password':
+        return 'Reset Password';
+      case 'terms':
+        return 'Terms & Conditions';
+      case 'register-success':
+      case 'forgot-password-success':
+        return ''; // No title for success states
+      default:
+        return 'Authentication';
+    }
+  };
+
+  const getModalSize = () => {
+    switch (currentView) {
+      case 'terms':
+        return 'lg';
+      case 'register':
+        return 'md';
+      case 'register-success':
+      case 'forgot-password-success':
+        return 'sm';
+      default:
+        return 'sm';
+    }
+  };
+
+  const getModalVariant = () => {
+    // Use mobile variant for all auth modals on mobile
+    return 'mobile';
+  };
+
+  const showBackButton = () => {
+    return currentView === 'terms' || currentView === 'forgot-password';
+  };
+
+  const showCloseButton = () => {
+    // Don't show close button on success states
+    return currentView !== 'terms' && currentView !== 'register-success' && currentView !== 'forgot-password-success';
+  };
+
+  const handleBack = () => {
+    if (currentView === 'terms') {
+      setCurrentView('register');
+    } else if (currentView === 'forgot-password') {
+      setCurrentView('login');
+    }
+  };
+
+  // Show success state for registration
+  if (currentView === 'register-success') {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onClose={handleClose}
+        title={getModalTitle()}
+        showCloseButton={showCloseButton()}
+        showBackButton={showBackButton()}
+        onBack={handleBack}
+        size={getModalSize()}
+        variant={getModalVariant()}
+      >
+        <div className={styles.authModalContent}>
+          <div className={styles.authFormContainer}>
+            <div className={styles.successState}>
+              <div className={styles.successIconLarge}>
+                <IoCheckmarkCircle />
+              </div>
+              <h2 className={styles.successTitle}>Registration Successful!</h2>
+              <p className={styles.successText}>
+                Welcome to MKN! Your account has been created and you are now signed in.
+              </p>
+              <div className={styles.successActions}>
+                <button
+                  onClick={handleContinueToApp}
+                  className={styles.continueButton}
+                  style={{
+                    background: 'var(--color-secondary)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: 'var(--radius-md)',
+                    cursor: 'pointer',
+                    transition: 'background-color var(--transition-normal)',
+                    fontFamily: 'inherit',
+                    fontSize: 'var(--font-size-base)',
+                    fontWeight: 'var(--font-weight-semibold)'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = 'var(--color-secondary-hover)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = 'var(--color-secondary)';
+                  }}
+                >
+                  Continue to App
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    );
+  }
+
+  // Show success state for forgot password
+  if (currentView === 'forgot-password-success') {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onClose={handleClose}
+        title={getModalTitle()}
+        showCloseButton={showCloseButton()}
+        showBackButton={showBackButton()}
+        onBack={handleBack}
+        size={getModalSize()}
+        variant={getModalVariant()}
+      >
+        <div className={styles.authModalContent}>
+          <div className={styles.authFormContainer}>
+            <div className={styles.successState}>
+              <div className={styles.successIconLarge}>
+                <IoCheckmarkCircle />
+              </div>
+              <h2 className={styles.successTitle}>Password Changed Successfully!</h2>
+              <p className={styles.successText}>
+                Please keep your new password safe and secure.
+              </p>
+              <div className={styles.successActions}>
+                <button
+                  onClick={handleContinueToApp}
+                  className={styles.continueButton}
+                  style={{
+                    background: 'var(--color-secondary)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: 'var(--radius-md)',
+                    cursor: 'pointer',
+                    transition: 'background-color var(--transition-normal)',
+                    fontFamily: 'inherit',
+                    fontSize: 'var(--font-size-base)',
+                    fontWeight: 'var(--font-weight-semibold)'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = 'var(--color-secondary-hover)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = 'var(--color-secondary)';
+                  }}
+                >
+                  Continue to App
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    );
+  }
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={handleClose}
+      title={getModalTitle()}
+      showCloseButton={showCloseButton()}
+      showBackButton={showBackButton()}
+      onBack={handleBack}
+      size={getModalSize()}
+      variant={getModalVariant()}
+    >
+      <div className={styles.authModalContent}>
+        {currentView === 'login' && (
+          <LoginForm
+            onSwitchToRegister={handleSwitchToRegister}
+            onForgotPassword={handleSwitchToForgotPassword}
+          />
+        )}
+
+        {currentView === 'register' && (
+          <RegisterForm
+            onSwitchToLogin={handleSwitchToLogin}
+            onShowTerms={handleSwitchToTerms}
+            onClose={handleVerificationModalClose}
+            onSuccess={handleRegisterSuccess}
+          />
+        )}
+
+        {currentView === 'forgot-password' && (
+          <ForgotPassword
+            onSwitchToLogin={handleSwitchToLogin}
+            onClose={handleVerificationModalClose}
+            onSuccess={handleForgotPasswordSuccess}
+          />
+        )}
+
+        {currentView === 'terms' && (
+          <div className={styles.termsContent}>
+            <div className={styles.termsSection}>
+              <h4>1. Membership Eligibility</h4>
+              <p>To become a member of MKN, you must:</p>
+              <ul>
+                <li>Be at least 16 years of age, or have parental/guardian consent if younger</li>
+                <li>Provide some form of personal identification</li>
+                <li>If married, provide written consent from your spouse to join the religious community</li>
+                <li>Complete the registration process</li>
+                <li>Agree to abide by the organization's spiritual principles and guidelines</li>
+              </ul>
+            </div>
+
+            <div className={styles.termsSection}>
+              <h4>2. Membership Responsibilities</h4>
+              <p>As a member, you are expected to:</p>
+              <ul>
+                <li>Maintain accurate personal information</li>
+                <li>Participate in spiritual activities and gatherings</li>
+                <li>Adhere to the spiritual code of conduct</li>
+                <li>Respect fellow members and spiritual leadership</li>
+                <li>Support the community through voluntary contributions as able</li>
+              </ul>
+            </div>
+
+            <div className={styles.termsSection}>
+              <h4>3. Data Privacy</h4>
+              <p>We are committed to protecting your personal information:</p>
+              <ul>
+                <li>Your data will be used solely for organizational and spiritual purposes</li>
+                <li>We implement security measures to protect your information</li>
+                <li>You may request access to your personal data</li>
+                <li>Data will not be shared with third parties without consent</li>
+              </ul>
+            </div>
+
+            <div className={styles.termsSection}>
+              <h4>4. Spiritual Code of Conduct</h4>
+              <p>Members must maintain spiritual and ethical behavior:</p>
+              <ul>
+                <li>Respect diversity and inclusion within our spiritual community</li>
+                <li>Maintain confidentiality of spiritual and organizational matters</li>
+                <li>Uphold the spiritual values and teachings of MKN</li>
+                <li>Participate in good faith in all spiritual activities</li>
+              </ul>
+            </div>
+
+            <div className={styles.termsSection}>
+              <h4>5. Membership Termination</h4>
+              <p>Membership may be terminated under the following circumstances:</p>
+              <ul>
+                <li>Repeated violation of spiritual principles and community guidelines</li>
+                <li>Behavior that disrupts the spiritual harmony of the community</li>
+                <li>At the member's request for personal or spiritual reasons</li>
+                <li>By mutual agreement for the benefit of the individual and community</li>
+              </ul>
+            </div>
+
+            <div className={styles.termsSection}>
+              <h4>6. Amendments</h4>
+              <p>The organization reserves the right to:</p>
+              <ul>
+                <li>Modify these terms with proper notice to the community</li>
+                <li>Update spiritual guidelines as inspired by divine guidance</li>
+                <li>Change organizational policies to better serve the spiritual mission</li>
+              </ul>
+              <p>Members will be notified of any changes to these terms and conditions.</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </Modal>
+  );
+};

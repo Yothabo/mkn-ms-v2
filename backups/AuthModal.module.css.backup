@@ -1,0 +1,1264 @@
+/* AuthModal Styles - Single Source of Truth for all Auth Forms */
+
+.authModalContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Common Auth Form Styles - Applied to all forms within AuthModal */
+.authFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-xl);
+  min-height: min-content;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.authFormHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-xl); /* Increased from var(--spacing-md) to var(--spacing-xl) */
+  width: 100%;
+  flex-shrink: 0;
+  padding-top: var(--spacing-sm);
+}
+
+.authFormHeader h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.authFormHeader p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  margin: var(--spacing-lg) 0;
+  flex: 1;
+  min-height: min-content;
+}
+
+.authInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.authInputLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  text-align: left;
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Auth Input - No default browser styles, only border changes */
+.authInput {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  transition: border-color var(--transition-normal);
+  background: transparent;
+  box-sizing: border-box;
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  height: 2.75rem;
+
+  /* Remove all default browser styles */
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Focus state - only border changes to green */
+.authInput:focus {
+  border-color: var(--color-secondary);
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Hover state - only border changes to green */
+.authInput:hover:not(:disabled) {
+  border-color: var(--color-secondary);
+  background: transparent;
+}
+
+/* Disabled state */
+.authInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: transparent;
+  border-color: var(--color-border);
+}
+
+/* Placeholder */
+.authInput::placeholder {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  opacity: 0.8;
+}
+
+/* Remove any browser autofill styles */
+.authInput:-webkit-autofill,
+.authInput:-webkit-autofill:hover,
+.authInput:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text);
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background: transparent;
+}
+
+.authErrorMessage {
+  background-color: color-mix(in srgb, var(--color-status-error) 10%, transparent);
+  border: 1px solid var(--color-status-error);
+  color: var(--color-status-error);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+/* Consistent button styling */
+.authSubmitButton {
+  width: 100%;
+  margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+  min-height: 2.75rem;
+}
+
+.authFormFooter {
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.authSwitchText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin: 0 0 var(--spacing-sm) 0;
+  line-height: var(--line-height-normal);
+}
+
+.authLinkButton {
+  background: none;
+  border: none;
+  color: var(--color-secondary);
+  cursor: pointer;
+  font-size: inherit;
+  text-decoration: underline;
+  transition: color var(--transition-normal);
+  white-space: nowrap;
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  line-height: var(--line-height-normal);
+  font-family: inherit;
+}
+
+.authLinkButton:hover:not(:disabled) {
+  color: var(--color-secondary-hover);
+  text-decoration: none;
+}
+
+.authLinkButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form-specific overrides - ALWAYS on same row */
+.authOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: var(--spacing-sm) 0;
+  gap: var(--spacing-sm);
+  flex-wrap: nowrap;
+}
+
+/* Custom Checkbox Styles - Larger size, white checkmark, proper background removal */
+.authRememberMe {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.authRememberMe input[type="checkbox"] {
+  margin: 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  
+  /* Hide default checkbox */
+  opacity: 0;
+  position: absolute;
+}
+
+.authRememberMe input[type="checkbox"] + span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-background-muted);
+  transition: all var(--transition-normal);
+  position: relative;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: transparent;
+}
+
+/* Unchecked state - Grey background with small grey border, no checkmark */
+.authRememberMe input[type="checkbox"]:not(:checked) + span {
+  background: var(--color-background-muted);
+  border: 1px solid var(--color-border);
+  color: transparent;
+}
+
+.authRememberMe input[type="checkbox"]:not(:checked) + span::before {
+  content: none;
+}
+
+/* Checked state - Green background with white checkmark */
+.authRememberMe input[type="checkbox"]:checked + span {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+  color: white;
+}
+
+.authRememberMe input[type="checkbox"]:checked + span::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Hover state - Show green background on hover (both checked and unchecked) */
+.authRememberMe:hover input[type="checkbox"] + span {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+/* Show checkmark on hover only when checked */
+.authRememberMe:hover input[type="checkbox"]:checked + span {
+  color: white;
+}
+
+.authRememberMe:hover input[type="checkbox"]:checked + span::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Don't show checkmark on hover when not checked */
+.authRememberMe:hover input[type="checkbox"]:not(:checked) + span {
+  color: transparent;
+}
+
+.authRememberMe:hover input[type="checkbox"]:not(:checked) + span::before {
+  content: none;
+}
+
+/* Focus state - Remove outline since we don't want borders */
+.authRememberMe input[type="checkbox"]:focus + span {
+  outline: none;
+}
+
+/* Disabled state */
+.authRememberMe input[type="checkbox"]:disabled + span {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-background-muted);
+  border: 1px solid var(--color-border);
+  color: transparent;
+}
+
+/* Additional styles for RegisterForm components */
+.authFormLayout {
+  width: 100%;
+}
+
+.authFormContent {
+  width: 100%;
+}
+
+.authFormFields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.authFormRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+/* Terms Agreement Checkbox - Same styling as Remember Me */
+.authTermsAgreement {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  cursor: pointer;
+  margin: var(--spacing-sm) 0;
+  position: relative;
+}
+
+.authTermsAgreement input[type="checkbox"] {
+  margin: 0.125rem 0 0 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  
+  /* Hide default checkbox */
+  opacity: 0;
+  position: absolute;
+}
+
+.authTermsAgreement input[type="checkbox"] + span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-background-muted);
+  transition: all var(--transition-normal);
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  color: transparent;
+}
+
+/* Unchecked state - Grey background with small grey border, no checkmark */
+.authTermsAgreement input[type="checkbox"]:not(:checked) + span {
+  background: var(--color-background-muted);
+  border: 1px solid var(--color-border);
+  color: transparent;
+}
+
+.authTermsAgreement input[type="checkbox"]:not(:checked) + span::before {
+  content: none;
+}
+
+/* Checked state - Green background with white checkmark */
+.authTermsAgreement input[type="checkbox"]:checked + span {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+  color: white;
+}
+
+.authTermsAgreement input[type="checkbox"]:checked + span::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Hover state - Show green background on hover (both checked and unchecked) */
+.authTermsAgreement:hover input[type="checkbox"] + span {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+/* Show checkmark on hover only when checked */
+.authTermsAgreement:hover input[type="checkbox"]:checked + span {
+  color: white;
+}
+
+.authTermsAgreement:hover input[type="checkbox"]:checked + span::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Don't show checkmark on hover when not checked */
+.authTermsAgreement:hover input[type="checkbox"]:not(:checked) + span {
+  color: transparent;
+}
+
+.authTermsAgreement:hover input[type="checkbox"]:not(:checked) + span::before {
+  content: none;
+}
+
+/* Focus state - Remove outline since we don't want borders */
+.authTermsAgreement input[type="checkbox"]:focus + span {
+  outline: none;
+}
+
+/* Disabled state */
+.authTermsAgreement input[type="checkbox"]:disabled + span {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-background-muted);
+  border: 1px solid var(--color-border);
+  color: transparent;
+}
+
+/* Responsive styles for all auth forms */
+@media (max-width: 768px) {
+  .authFormContainer {
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+    justify-content: flex-start;
+    min-height: auto;
+  }
+
+  .authFormHeader {
+    margin-bottom: var(--spacing-lg); /* Adjusted for mobile */
+    padding-top: var(--spacing-xs);
+  }
+
+  .authFormHeader h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .authForm {
+    margin: var(--spacing-lg) 0;
+    gap: var(--spacing-md);
+    justify-content: flex-start;
+  }
+
+  .authInput {
+    padding: var(--spacing-sm) var(--spacing-md);
+    height: 2.75rem;
+  }
+
+  .authInput::placeholder {
+    font-size: var(--font-size-xs);
+  }
+
+  .authFormFooter {
+    padding-top: var(--spacing-md);
+    margin-top: auto;
+  }
+
+  .authErrorMessage {
+    margin: 0;
+  }
+
+  .authFormRow {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  /* Keep options on same row even on mobile */
+  .authOptions {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-wrap: nowrap;
+  }
+
+  .authRememberMe {
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+  }
+
+  .authLinkButton {
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+  }
+
+  /* Adjust checkbox size for mobile */
+  .authRememberMe input[type="checkbox"] + span,
+  .authTermsAgreement input[type="checkbox"] + span {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  .authRememberMe input[type="checkbox"]:checked + span::before,
+  .authTermsAgreement input[type="checkbox"]:checked + span::before,
+  .authRememberMe:hover input[type="checkbox"]:checked + span::before,
+  .authTermsAgreement:hover input[type="checkbox"]:checked + span::before {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .authFormContainer {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  }
+
+  .authFormHeader h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .authFormHeader p {
+    font-size: var(--font-size-sm);
+  }
+
+  .authFormFooter {
+    margin-top: auto;
+  }
+
+  .authForm {
+    margin: var(--spacing-md) 0;
+  }
+
+  .authInput::placeholder {
+    font-size: var(--font-size-xs);
+  }
+
+  /* Ensure options stay on same row even on very small screens */
+  .authOptions {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .authRememberMe {
+    font-size: var(--font-size-xs);
+    gap: var(--spacing-xs);
+  }
+
+  .authLinkButton {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 360px) {
+  /* Extra small screens - still keep on same row but adjust spacing */
+  .authOptions {
+    gap: var(--spacing-xs);
+  }
+
+  .authRememberMe {
+    font-size: 0.7rem;
+  }
+
+  .authLinkButton {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .authFormHeader {
+    margin-bottom: var(--spacing-xl); /* Keep the increased space on desktop */
+    padding-top: var(--spacing-sm);
+  }
+
+  .authForm {
+    margin: var(--spacing-lg) 0;
+  }
+
+  .authFormContainer {
+    justify-content: center;
+  }
+}
+
+/* Terms content styles - TREE-LIKE INDENTATION */
+.termsContent {
+  padding: var(--spacing-xl);
+  height: 100%;
+  overflow-y: auto;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.termsSection {
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-lg);
+}
+
+.termsSection h4 {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  padding-left: 0;
+}
+
+.termsSection p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  line-height: 1.5;
+  padding-left: var(--spacing-md);
+}
+
+.termsSection ul {
+  color: var(--color-text-light);
+  margin-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  display: block;
+  width: calc(100% - var(--spacing-xl));
+  padding-left: 0;
+  list-style-position: outside;
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--spacing-lg);
+}
+
+.termsSection li {
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  padding-left: var(--spacing-sm);
+  line-height: 1.5;
+  position: relative;
+}
+
+.termsSection li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--spacing-lg) - 1px);
+  top: 0.5rem;
+  width: var(--spacing-md);
+  height: 2px;
+  background: var(--color-border);
+}
+
+.termsSection ul {
+  list-style-type: disc;
+}
+
+.termsSection li::marker {
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+}
+
+/* Responsive styles for terms */
+@media (max-width: 768px) {
+  .termsContent {
+    padding: var(--spacing-lg);
+  }
+
+  .termsSection {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+  }
+
+  .termsSection h4 {
+    font-size: var(--font-size-sm);
+  }
+
+  .termsSection p {
+    font-size: var(--font-size-xs);
+    padding-left: var(--spacing-sm);
+  }
+
+  .termsSection ul {
+    font-size: var(--font-size-xs);
+    margin-left: var(--spacing-lg);
+    width: calc(100% - var(--spacing-lg));
+    padding-left: var(--spacing-md);
+    border-left-width: 1px;
+  }
+
+  .termsSection li {
+    font-size: var(--font-size-xs);
+    padding-left: var(--spacing-xs);
+    line-height: 1.4;
+  }
+
+  .termsSection li::before {
+    left: calc(-1 * var(--spacing-md) - 1px);
+    width: var(--spacing-sm);
+    height: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .termsContent {
+    padding: var(--spacing-md);
+  }
+
+  .termsSection {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+  }
+
+  .termsSection ul {
+    margin-left: var(--spacing-md);
+    width: calc(100% - var(--spacing-md));
+    padding-left: var(--spacing-sm);
+  }
+
+  .termsSection li {
+    padding-left: var(--spacing-xs);
+  }
+
+  .termsSection li::before {
+    left: calc(-1 * var(--spacing-sm) - 1px);
+    width: var(--spacing-xs);
+  }
+}
+
+/* Desktop specific indentation */
+@media (min-width: 769px) {
+  .termsSection ul {
+    margin-left: var(--spacing-2xl);
+    width: calc(100% - var(--spacing-2xl));
+    padding-left: var(--spacing-xl);
+  }
+
+  .termsSection li {
+    padding-left: var(--spacing-md);
+  }
+
+  .termsSection li::before {
+    left: calc(-1 * var(--spacing-xl) - 1px);
+    width: var(--spacing-lg);
+  }
+}
+
+/* Ensure consistent button widths across all auth forms */
+.authForm button[type="submit"] {
+  width: 100%;
+  min-height: 2.75rem;
+}
+
+/* Fix checkbox alignment and visibility */
+.authRememberMe,
+.authTermsAgreement {
+  position: relative;
+}
+
+/* Add span elements for custom checkboxes */
+.authRememberMe span,
+.authTermsAgreement span {
+  display: inline-block;
+}
+
+/* Success State for Forgot Password */
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+}
+
+.successIconLarge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.successIconLarge svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-success);
+}
+
+.successTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+}
+
+.successText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  padding: 0 var(--spacing-md);
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.continueButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Error State for Forgot Password */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+}
+
+.errorIconLarge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.errorIconLarge svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-error);
+}
+
+.errorTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+}
+
+.errorText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  text-align: center;
+  padding: 0 var(--spacing-md);
+}
+
+.errorActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.retryButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Success State for Forgot Password */
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.successIconLarge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.successIconLarge svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-success);
+}
+
+.successTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.successText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+  padding: 0 var(--spacing-md);
+  box-sizing: border-box;
+}
+
+.continueButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Error State for Forgot Password */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.errorIconLarge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.errorIconLarge svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-error);
+}
+
+.errorTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.errorText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  text-align: center;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.errorActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+  padding: 0 var(--spacing-md);
+  box-sizing: border-box;
+}
+
+.retryButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive styles for success/error states */
+@media (max-width: 768px) {
+  .successState,
+  .errorState {
+    padding: var(--spacing-xl);
+    gap: var(--spacing-lg);
+  }
+
+  .successTitle,
+  .errorTitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .successText,
+  .errorText {
+    font-size: var(--font-size-sm);
+  }
+
+  .successActions,
+  .errorActions {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .successState,
+  .errorState {
+    padding: var(--spacing-lg);
+  }
+
+  .successIconLarge svg,
+  .errorIconLarge svg {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Success State for Forgot Password */
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.successIconLarge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.successIconLarge svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-success);
+}
+
+.successTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.successText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+  padding: 0 var(--spacing-md);
+  box-sizing: border-box;
+}
+
+.continueButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Error State for Forgot Password */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.errorIconLarge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.errorIconLarge svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-error);
+}
+
+.errorTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.errorText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  text-align: center;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+.errorActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+  padding: 0 var(--spacing-md);
+  box-sizing: border-box;
+}
+
+.retryButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive styles for success/error states */
+@media (max-width: 768px) {
+  .successState,
+  .errorState {
+    padding: var(--spacing-xl);
+    gap: var(--spacing-lg);
+  }
+
+  .successTitle,
+  .errorTitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .successText,
+  .errorText {
+    font-size: var(--font-size-sm);
+  }
+
+  .successActions,
+  .errorActions {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .successState,
+  .errorState {
+    padding: var(--spacing-lg);
+  }
+
+  .successIconLarge svg,
+  .errorIconLarge svg {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Success Note Style */
+.successNote {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: var(--spacing-sm) 0 0 0;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+  font-style: italic;
+  text-align: center;
+  opacity: 0.8;
+}

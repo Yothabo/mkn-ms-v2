@@ -1,0 +1,142 @@
+/* Verification Modal Component Styles */
+
+/* Consistent button styling with auth modal */
+.verifyButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.resendButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  background: var(--color-secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+
+.resendButton:hover:not(:disabled) {
+  background: var(--color-secondary-hover);
+}
+
+.resendButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-border);
+}
+
+/* Consistent button styling for error state - FULL WIDTH */
+.retryButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Ensure all verification buttons match auth modal button height */
+.verifyButton,
+.retryButton,
+.resendButton {
+  min-height: 3rem;
+}
+
+/* Loading Spinner Styles */
+.loadingSpinnerLarge {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.loadingSpinnerSmall {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: var(--spacing-sm);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sendingText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  text-align: center;
+  margin-top: var(--spacing-md);
+}
+
+/* Loading state for buttons */
+.verifyButton:disabled {
+  position: relative;
+}
+
+.verifyButton:disabled::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.5rem;
+  margin-top: -0.5rem;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Verifying Overlay */
+.verifyingOverlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.verifyingOverlay .loadingSpinnerSmall {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Debug Information */
+.debugInfo {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  background: color-mix(in srgb, var(--color-background-muted) 50%, transparent);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+}
+
+.debugInfo small {
+  opacity: 0.7;
+}

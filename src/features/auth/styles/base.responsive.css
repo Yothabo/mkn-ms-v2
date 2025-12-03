@@ -1,0 +1,10 @@
+/* Auth Base Responsive Styles */
+@media (max-width: 768px) {
+  .auth-base-header h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .auth-base-form {
+    gap: var(--spacing-md);
+  }
+}

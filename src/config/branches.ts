@@ -25,11 +25,21 @@ export const branches: Branch[] = [
     location: 'Bulawayo',
     country: 'Zimbabwe',
     dateOfEstablishment: '2010-01-01',
-    availableServices: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday-morning', 'saturday-afternoon', 'sunday-morning', 'sunday-afternoon'],
+    availableServices: [
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday-morning',
+      'saturday-afternoon',
+      'sunday-morning',
+      'sunday-afternoon',
+    ],
     contact: {
-      address: 'Bulawayo Central, Zimbabwe'
+      address: 'Bulawayo Central, Zimbabwe',
     },
-    status: 'active'
+    status: 'active',
   },
   {
     id: 'harare',
@@ -39,9 +49,9 @@ export const branches: Branch[] = [
     dateOfEstablishment: '2012-03-15',
     availableServices: ['sunday-morning', 'sunday-afternoon'],
     contact: {
-      address: 'Harare Central, Zimbabwe'
+      address: 'Harare Central, Zimbabwe',
     },
-    status: 'active'
+    status: 'active',
   },
   {
     id: 'johannesburg',
@@ -51,9 +61,9 @@ export const branches: Branch[] = [
     dateOfEstablishment: '2015-06-01',
     availableServices: ['sunday-morning', 'sunday-afternoon'],
     contact: {
-      address: 'Johannesburg Central, South Africa'
+      address: 'Johannesburg Central, South Africa',
     },
-    status: 'active'
+    status: 'active',
   },
   {
     id: 'pretoria',
@@ -63,9 +73,9 @@ export const branches: Branch[] = [
     dateOfEstablishment: '2017-08-20',
     availableServices: ['sunday-morning', 'sunday-afternoon'],
     contact: {
-      address: 'Pretoria Central, South Africa'
+      address: 'Pretoria Central, South Africa',
     },
-    status: 'active'
+    status: 'active',
   },
   {
     id: 'gaborone',
@@ -75,25 +85,25 @@ export const branches: Branch[] = [
     dateOfEstablishment: '2018-02-10',
     availableServices: ['sunday-morning', 'sunday-afternoon'],
     contact: {
-      address: 'Gaborone Central, Botswana'
+      address: 'Gaborone Central, Botswana',
     },
-    status: 'active'
-  }
+    status: 'active',
+  },
 ];
 
 // Helper functions
 export const getBranchById = (id: string): Branch | undefined => {
-  return branches.find(branch => branch.id === id);
+  return branches.find((branch) => branch.id === id);
 };
 
 export const getBranchesByCountry = (country: string): Branch[] => {
-  return branches.filter(branch => branch.country === country);
+  return branches.filter((branch) => branch.country === country);
 };
 
 export const getBranchesByService = (serviceType: string): Branch[] => {
-  return branches.filter(branch => branch.availableServices.includes(serviceType));
+  return branches.filter((branch) => branch.availableServices.includes(serviceType));
 };
 
 export const getActiveBranches = (): Branch[] => {
-  return branches.filter(branch => branch.status === 'active');
+  return branches.filter((branch) => branch.status === 'active');
 };

@@ -1,0 +1,37 @@
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: var(--spacing-lg);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 400px;
+}
+
+.getStartedBtn,
+.websiteBtn {
+  flex: 1;
+  min-width: 160px;
+}
+
+/* Custom hover style for website button */
+.websiteBtn:hover:not(:disabled) {
+  background: var(--color-text-light) !important;
+  border-color: var(--color-text-light) !important;
+  color: var(--color-white) !important;
+  transform: translateY(-1px);
+}
+
+.disclaimer {
+  font-size: var(--font-size-xs); /* Made smaller */
+  color: var(--color-text-light);
+  line-height: 1.4;
+  margin: 0;
+  max-width: 500px;
+}
+
+.highlight {
+  color: var(--color-secondary);
+  font-weight: var(--font-weight-semibold);
+}

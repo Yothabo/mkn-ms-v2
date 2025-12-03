@@ -1,0 +1,100 @@
+/* Verification Modal Method Selection Styles */
+.methodSelection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  padding: var(--spacing-lg);
+}
+
+.instruction {
+  text-align: center;
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.instruction h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.instruction p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.methodButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+}
+
+.methodButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  width: 100%;
+  text-align: left;
+}
+
+.methodButton:hover {
+  border-color: var(--color-secondary);
+  background: var(--color-background);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.methodIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: var(--color-secondary);
+  color: white;
+  flex-shrink: 0;
+}
+
+.methodIcon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.methodInfo {
+  flex: 1;
+  text-align: left;
+}
+
+.methodInfo h4 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.methodInfo p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}

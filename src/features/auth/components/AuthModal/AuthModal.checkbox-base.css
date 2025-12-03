@@ -1,0 +1,138 @@
+/* AuthModal Base Checkbox Styles */
+
+/* Common checkbox container styles */
+.authRememberMe,
+.authTermsAgreement {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  cursor: pointer;
+  position: relative;
+}
+
+/* Hide default checkbox */
+.authRememberMe input[type="checkbox"],
+.authTermsAgreement input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Custom checkbox span */
+.authRememberMe input[type="checkbox"] + span,
+.authTermsAgreement input[type="checkbox"] + span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-background-muted);
+  transition: all var(--transition-normal);
+  position: relative;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: transparent;
+}
+
+/* Unchecked state */
+.authRememberMe input[type="checkbox"]:not(:checked) + span,
+.authTermsAgreement input[type="checkbox"]:not(:checked) + span {
+  background: var(--color-background-muted);
+  border: 1px solid var(--color-border);
+  color: transparent;
+}
+
+.authRememberMe input[type="checkbox"]:not(:checked) + span::before,
+.authTermsAgreement input[type="checkbox"]:not(:checked) + span::before {
+  content: none;
+}
+
+/* Checked state */
+.authRememberMe input[type="checkbox"]:checked + span,
+.authTermsAgreement input[type="checkbox"]:checked + span {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+  color: white;
+}
+
+.authRememberMe input[type="checkbox"]:checked + span::before,
+.authTermsAgreement input[type="checkbox"]:checked + span::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Hover state */
+.authRememberMe:hover input[type="checkbox"] + span,
+.authTermsAgreement:hover input[type="checkbox"] + span {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+/* Show checkmark on hover only when checked */
+.authRememberMe:hover input[type="checkbox"]:checked + span,
+.authTermsAgreement:hover input[type="checkbox"]:checked + span {
+  color: white;
+}
+
+.authRememberMe:hover input[type="checkbox"]:checked + span::before,
+.authTermsAgreement:hover input[type="checkbox"]:checked + span::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Don't show checkmark on hover when not checked */
+.authRememberMe:hover input[type="checkbox"]:not(:checked) + span,
+.authTermsAgreement:hover input[type="checkbox"]:not(:checked) + span {
+  color: transparent;
+}
+
+.authRememberMe:hover input[type="checkbox"]:not(:checked) + span::before,
+.authTermsAgreement:hover input[type="checkbox"]:not(:checked) + span::before {
+  content: none;
+}
+
+/* Focus state */
+.authRememberMe input[type="checkbox"]:focus + span,
+.authTermsAgreement input[type="checkbox"]:focus + span {
+  outline: none;
+}
+
+/* Disabled state */
+.authRememberMe input[type="checkbox"]:disabled + span,
+.authTermsAgreement input[type="checkbox"]:disabled + span {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-background-muted);
+  border: 1px solid var(--color-border);
+  color: transparent;
+}
+
+/* Fix checkbox alignment and visibility */
+.authRememberMe,
+.authTermsAgreement {
+  position: relative;
+}
+
+/* Add span elements for custom checkboxes */
+.authRememberMe span,
+.authTermsAgreement span {
+  display: inline-block;
+}

@@ -1,0 +1,34 @@
+.static { position: static; }
+.fixed { position: fixed; }
+.absolute { position: absolute; }
+.relative { position: relative; }
+.sticky { position: sticky; }
+
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.inset-1 { top: var(--spacing-xs); right: var(--spacing-xs); bottom: var(--spacing-xs); left: var(--spacing-xs); }
+.inset-2 { top: var(--spacing-sm); right: var(--spacing-sm); bottom: var(--spacing-sm); left: var(--spacing-sm); }
+.inset-4 { top: var(--spacing-md); right: var(--spacing-md); bottom: var(--spacing-md); left: var(--spacing-md); }
+
+.top-0 { top: 0; }
+.top-1 { top: var(--spacing-xs); }
+.top-2 { top: var(--spacing-sm); }
+.top-4 { top: var(--spacing-md); }
+.top-auto { top: auto; }
+
+.right-0 { right: 0; }
+.right-1 { right: var(--spacing-xs); }
+.right-2 { right: var(--spacing-sm); }
+.right-4 { right: var(--spacing-md); }
+.right-auto { right: auto; }
+
+.bottom-0 { bottom: 0; }
+.bottom-1 { bottom: var(--spacing-xs); }
+.bottom-2 { bottom: var(--spacing-sm); }
+.bottom-4 { bottom: var(--spacing-md); }
+.bottom-auto { bottom: auto; }
+
+.left-0 { left: 0; }
+.left-1 { left: var(--spacing-xs); }
+.left-2 { left: var(--spacing-sm); }
+.left-4 { left: var(--spacing-md); }
+.left-auto { left: auto; }

@@ -11,36 +11,50 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>('light');
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Initialize theme from localStorage or system preference
   useEffect(() => {
-    // Check for saved theme preference or prefer color scheme
     const savedTheme = localStorage.getItem('mkn-theme') as Theme;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme) {
-      setTheme(savedTheme);
+
+    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
+      setThemeState(savedTheme);
     } else if (prefersDark) {
-      setTheme('dark');
+      setThemeState('dark');
+    } else {
+      setThemeState('light');
     }
+    setIsInitialized(true);
   }, []);
 
+  // Apply theme to document and save to localStorage
   useEffect(() => {
-    // Apply theme to document
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.classList.add('theme-transition');
-    localStorage.setItem('mkn-theme', theme);
+    if (!isInitialized) return;
 
-    // Remove transition class after initial apply
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('mkn-theme', theme);
+    
+    // Add transition class temporarily
+    document.documentElement.classList.add('theme-transition');
     const timeout = setTimeout(() => {
       document.documentElement.classList.remove('theme-transition');
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [theme]);
+  }, [theme, isInitialized]);
+
+  const setTheme = (newTheme: Theme) => {
+    if (isInitialized) {
+      setThemeState(newTheme);
+    }
+  };
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    if (isInitialized) {
+      setThemeState(prev => prev === 'light' ? 'dark' : 'light');
+    }
   };
 
   return (

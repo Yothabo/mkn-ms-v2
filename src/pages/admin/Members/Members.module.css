@@ -1,0 +1,194 @@
+.membersPage {
+  padding: 0;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.desktopTableContainer,
+.mobileTableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.membersTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Desktop Table Styles */
+.desktopTable tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.desktopTable tbody tr:hover {
+  background: color-mix(in srgb, var(--color-secondary) 5%, transparent);
+}
+
+.desktopTable td {
+  padding: var(--spacing-md) var(--spacing-sm);
+  vertical-align: middle;
+  border: none;
+}
+
+/* Left align all table cells */
+.leftAlign {
+  text-align: left !important;
+}
+
+/* Status dot styles - larger size */
+.statusDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.nameWithStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-align: left;
+}
+
+/* Mobile Table Styles */
+.mobileTable {
+  display: none;
+}
+
+.mobileTable td {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.mobileName {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: left;
+}
+
+.memberFullName {
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.memberCardMobile {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.mobileContact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: left;
+}
+
+.memberPhoneMobile {
+  font-weight: var(--font-weight-medium);
+}
+
+.memberEmailMobile {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.mobileBranch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: left;
+}
+
+.memberBranchMobile {
+  font-weight: var(--font-weight-medium);
+}
+
+.memberPositionMobile {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+/* Data Protection Disclaimer */
+.disclaimer {
+  margin-top: var(--spacing-2xl);
+  padding: var(--spacing-lg);
+  background: color-mix(in srgb, var(--color-status-info) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-status-info) 30%, transparent);
+  border-radius: var(--radius-lg);
+  text-align: left;
+}
+
+.disclaimerContent h4 {
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-status-info);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.disclaimerContent p {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .desktopTable {
+    display: none;
+  }
+
+  .mobileTable {
+    display: table;
+  }
+
+  .mobileTable td {
+    padding: var(--spacing-md);
+  }
+
+  .statusDot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileTable td {
+    padding: var(--spacing-sm);
+  }
+
+  .statusDot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .disclaimer {
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+  }
+}
+
+/* Ensure all content is left-aligned */
+.membersTable td,
+.mobileName,
+.mobileContact,
+.mobileBranch,
+.disclaimerContent {
+  text-align: left;
+}
+
+/* Add these for temporary placeholder */
+.tempHidden {
+  display: none !important;
+}

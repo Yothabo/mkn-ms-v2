@@ -1,0 +1,38 @@
+/* Global Styles - Modular Import System */
+@import './variables.css';
+@import './shared/variables/colors.css';
+@import './reset.css';
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/forms.css';
+@import './base/interactive.css';
+@import './shared/index.css';
+@import './shared/layout/spacing.css'; /* Add layout spacing */
+@import './themes.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Global tap highlight removal for all elements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a, input, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Critical layout styles */
+body {
+  font-family: var(--font-family-primary, 'Inter', sans-serif);
+  line-height: var(--line-height-normal, 1.5);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

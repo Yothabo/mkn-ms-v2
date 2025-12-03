@@ -1,0 +1,6 @@
+/* AuthModal Base Styles - Core Form Components */
+
+/* Import split base styles */
+@import './AuthModal.layout.css';
+@import './AuthModal.forms.css';
+@import './AuthModal.responsive.css';

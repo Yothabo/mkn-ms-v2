@@ -1,0 +1,688 @@
+/* Verification Modal Styles */
+.verificationModalContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl);
+  box-sizing: border-box;
+  min-height: 400px;
+}
+
+/* Method Selection Styles */
+.methodSelection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  padding: var(--spacing-lg);
+}
+
+.instruction {
+  text-align: center;
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.instruction h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.instruction p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.methodButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+}
+
+.methodButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  width: 100%;
+  text-align: left;
+}
+
+.methodButton:hover {
+  border-color: var(--color-secondary);
+  background: var(--color-background);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.methodIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: var(--color-secondary);
+  color: white;
+  flex-shrink: 0;
+}
+
+.methodIcon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.methodInfo {
+  flex: 1;
+  text-align: left;
+}
+
+.methodInfo h4 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.methodInfo p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+/* OTP Verification Styles */
+.otpVerification {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: var(--spacing-xl);
+}
+
+.otpSentMessage {
+  text-align: center;
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.successIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.successIcon svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-success);
+}
+
+.otpSentMessage h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.otpSentText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  padding: 0 var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.maskedContact {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.otpForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+}
+
+.otpInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.otpLabel {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  text-align: center;
+  line-height: var(--line-height-normal);
+  padding: 0 var(--spacing-sm);
+}
+
+.otpInput {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-family: inherit;
+  transition: border-color var(--transition-normal);
+  background: transparent;
+  box-sizing: border-box;
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  height: 3.5rem;
+  text-align: center;
+  letter-spacing: 0.5em;
+  font-weight: var(--font-weight-semibold);
+
+  /* Remove all default browser styles */
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Focus state - only solid green border, no shadow */
+.otpInput:focus {
+  border-color: var(--color-secondary);
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+.otpInput:hover:not(:disabled) {
+  border-color: var(--color-secondary);
+  background: transparent;
+}
+
+.otpInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: transparent;
+  border-color: var(--color-border);
+}
+
+.otpInput::placeholder {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  opacity: 0.8;
+  letter-spacing: normal;
+  font-weight: var(--font-weight-normal);
+}
+
+/* OTP Input Error State */
+.otpInputError {
+  border-color: var(--color-status-error) !important;
+  background-color: color-mix(in srgb, var(--color-status-error) 5%, transparent) !important;
+}
+
+.otpInputError:focus {
+  border-color: var(--color-status-error) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.otpErrorText {
+  color: var(--color-status-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+}
+
+.timer {
+  text-align: center;
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.timeLeft {
+  color: var(--color-status-success);
+  font-weight: var(--font-weight-medium);
+}
+
+.timeExpired {
+  color: var(--color-status-error);
+  font-weight: var(--font-weight-medium);
+}
+
+.otpActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  padding: 0 var(--spacing-sm);
+}
+
+/* Consistent button styling with auth modal */
+.verifyButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.resendButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  background: var(--color-secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+
+.resendButton:hover:not(:disabled) {
+  background: var(--color-secondary-hover);
+}
+
+.resendButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-border);
+}
+
+/* Success State */
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+}
+
+.successState h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+}
+
+.successState p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  padding: 0 var(--spacing-md);
+}
+
+/* Error State - Using your existing class names */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+}
+
+.errorIconLarge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.errorIconLarge svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-status-error);
+}
+
+.errorTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+}
+
+.errorText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  text-align: center;
+  padding: 0 var(--spacing-md);
+}
+
+.errorActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+/* Consistent button styling for error state - FULL WIDTH */
+.retryButton {
+  width: 100%;
+  margin: 0;
+  min-height: 3rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Sending State */
+.sendingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--spacing-2xl);
+  margin: auto;
+  justify-content: center;
+}
+
+.sendingState h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+  padding: 0 var(--spacing-md);
+}
+
+.sendingState p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  padding: 0 var(--spacing-md);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .verificationModalContent {
+    padding: var(--spacing-xl);
+    justify-content: center;
+    min-height: 350px;
+  }
+
+  .methodSelection,
+  .otpVerification,
+  .successState,
+  .errorState,
+  .sendingState {
+    max-width: 100%;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+  }
+
+  .methodButton {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+
+  .methodIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .methodIcon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .otpInput {
+    height: 3rem;
+    font-size: var(--font-size-base);
+    padding: var(--spacing-md);
+  }
+
+  .successIcon svg,
+  .errorIconLarge svg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .instruction h2,
+  .otpSentMessage h2,
+  .successState h2,
+  .errorTitle,
+  .sendingState h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .verifyButton,
+  .retryButton,
+  .resendButton {
+    min-height: 2.75rem;
+  }
+
+  .instruction,
+  .methodButtons,
+  .otpSentMessage,
+  .otpForm,
+  .otpLabel,
+  .timer,
+  .otpActions,
+  .errorActions {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .verificationModalContent {
+    padding: var(--spacing-lg);
+    min-height: 300px;
+  }
+
+  .methodSelection,
+  .otpVerification,
+  .successState,
+  .errorState,
+  .sendingState {
+    padding: var(--spacing-md);
+  }
+
+  .methodButtons {
+    gap: var(--spacing-sm);
+  }
+
+  .methodButton {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .methodInfo h4 {
+    font-size: var(--font-size-sm);
+  }
+
+  .methodInfo p {
+    font-size: var(--font-size-xs);
+  }
+
+  .otpInput {
+    height: 2.75rem;
+    font-size: var(--font-size-base);
+    letter-spacing: 0.25em;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .verifyButton,
+  .retryButton,
+  .resendButton {
+    min-height: 2.75rem;
+  }
+
+  .instruction p,
+  .otpSentText,
+  .successState p,
+  .errorText,
+  .sendingState p {
+    font-size: var(--font-size-sm);
+  }
+
+  .instruction,
+  .methodButtons,
+  .otpSentMessage,
+  .otpForm,
+  .otpLabel,
+  .timer,
+  .otpActions,
+  .errorActions {
+    padding: 0 var(--spacing-xs);
+  }
+}
+
+/* Ensure all verification buttons match auth modal button height */
+.verifyButton,
+.retryButton,
+.resendButton {
+  min-height: 3rem;
+}
+
+/* Center alignment for all verification modal content */
+.methodSelection,
+.otpVerification,
+.successState,
+.errorState,
+.sendingState {
+  margin: auto;
+}
+
+/* Loading Spinner Styles */
+.loadingSpinnerLarge {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.loadingSpinnerSmall {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: var(--spacing-sm);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sendingText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  text-align: center;
+  margin-top: var(--spacing-md);
+}
+
+/* Loading state for buttons */
+.verifyButton:disabled {
+  position: relative;
+}
+
+.verifyButton:disabled::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.5rem;
+  margin-top: -0.5rem;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Verifying Overlay */
+.verifyingOverlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.verifyingOverlay .loadingSpinnerSmall {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Debug Information */
+.debugInfo {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  background: color-mix(in srgb, var(--color-background-muted) 50%, transparent);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+}
+
+.debugInfo small {
+  opacity: 0.7;
+}

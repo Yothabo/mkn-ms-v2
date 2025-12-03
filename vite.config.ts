@@ -14,20 +14,21 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 1500,
     minify: 'esbuild',
     cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
+          icons: ['react-icons'],
         },
       },
     },
   },
   optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'react-icons'],
     force: false,
-    entries: ['./src/main.tsx'],
   },
   esbuild: {
     jsx: 'automatic',

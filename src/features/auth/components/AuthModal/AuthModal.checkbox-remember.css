@@ -1,0 +1,22 @@
+/* AuthModal Remember Me Checkbox Styles */
+
+.authRememberMe {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.authRememberMe input[type="checkbox"] {
+  margin: 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
