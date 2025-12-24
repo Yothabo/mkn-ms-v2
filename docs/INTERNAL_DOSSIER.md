@@ -2,12 +2,8 @@
 Feature: System Overview
 Component: Documentation, Strategy
 Document Type: Internal Dossier
-Last Updated: November 2025
+Last Updated: 24 December 2025
 Maintainer: @thabo (Termux Native Build)
----
-
-# Internal Development Dossier: MKN Management System v2
-
 ---
 
 ## Environment Context
