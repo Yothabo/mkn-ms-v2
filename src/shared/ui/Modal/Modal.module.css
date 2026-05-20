@@ -1,7 +1,0 @@
-/* Import modular styles - must be first */
-@import './styles/overlay.css';
-@import './styles/content.css';
-@import './styles/header.css';
-@import './styles/body.css';
-@import './styles/responsive.css';
-@import './styles/accessibility.css';

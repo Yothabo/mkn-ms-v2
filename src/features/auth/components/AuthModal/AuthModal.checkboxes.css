@@ -1,6 +1,0 @@
-/* AuthModal Checkbox Styles */
-
-/* Import split checkbox styles */
-@import './AuthModal.checkbox-base.css';
-@import './AuthModal.checkbox-remember.css';
-@import './AuthModal.checkbox-terms.css';

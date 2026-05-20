@@ -1,0 +1,99 @@
+/* Global color classes for screens */
+.screen-0-text {
+  color: var(--color-cream) !important;
+}
+
+.screen-0-dot {
+  background-color: var(--color-orange) !important;
+}
+
+.screen-0-block {
+  background-color: var(--color-orange) !important;
+}
+
+.screen-0-bg {
+  background-color: var(--color-dark-green) !important;
+}
+
+.screen-1-text {
+  color: var(--color-dark-green) !important;
+}
+
+.screen-1-dot {
+  background-color: var(--color-orange) !important;
+}
+
+.screen-1-block {
+  background-color: var(--color-orange) !important;
+}
+
+.screen-1-bg {
+  background-color: var(--color-cream) !important;
+}
+
+.screen-2-text {
+  color: var(--color-cream) !important;
+}
+
+.screen-2-dot {
+  background-color: var(--color-orange) !important;
+}
+
+.screen-2-block {
+  background-color: var(--color-orange) !important;
+}
+
+.screen-2-bg {
+  background-color: var(--color-dark-green) !important;
+}
+
+.screen-3-text {
+  color: var(--color-cream) !important;
+}
+
+.screen-3-dot {
+  background-color: var(--color-dark-green) !important;
+}
+
+.screen-3-block {
+  background-color: var(--color-dark-green) !important;
+}
+
+.screen-3-bg {
+  background-color: var(--color-orange) !important;
+}
+
+.screen-4-text {
+  color: var(--color-cream) !important;
+}
+
+.screen-4-dot {
+  background-color: var(--color-cream) !important;
+}
+
+.screen-4-block {
+  background-color: var(--color-cream) !important;
+}
+
+.screen-4-bg {
+  background-color: var(--color-dark-green) !important;
+}
+
+.screen-5-text {
+  color: var(--color-cream) !important;
+}
+
+.screen-5-dot {
+  background-color: var(--color-dark-green) !important;
+}
+
+.screen-5-block {
+  background-color: var(--color-dark-green) !important;
+}
+
+.screen-5-bg {
+  background-color: var(--color-orange) !important;
+}
+
+/* Removed: location and raffle screen classes (screen-5, screen-6, screen-7) */
+/* Feedback screen now uses screen-5 classes (orange background) */

@@ -1,22 +1,17 @@
 import React from 'react';
-import { AuthProvider } from '../shared/context/AuthContext';
-import { LoadingProvider } from '../shared/context/LoadingContext';
-import { ThemeProvider } from '../shared/context/ThemeContext';
-import AppRoutes from './routes/AppRoutes';
-import '../core/styles/globals.css';
-import '../core/styles/themes.css';
-import '../features/auth/styles/base.css';
+import Landing from '../pages/public/Landing';
+import ErrorBoundary from '../shared/components/ErrorBoundary/ErrorBoundary';
+import { ScreenProvider } from './providers/ScreenProvider';
+import '../styles/globals.css';
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <LoadingProvider>
-          <div className="app">
-            <AppRoutes />
-          </div>
-        </LoadingProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ScreenProvider>
+        <Landing />
+      </ScreenProvider>
+    </ErrorBoundary>
   );
-}
+};
+
+export default App;

@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.textGridContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: visible !important;
+  perspective: 1000px;
+}
+
+.textGrid {
+  line-height: 1;
+  max-inline-size: 8ch;
+  display: grid;
+  grid-template-columns: repeat(8, 1ch);
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  transform-style: preserve-3d;
+}
+
+/* Span positioning styles */
+.span1 {
+  font-size: 0.8em;
+  grid-column: 1 / 9;
+  text-transform: normal;
+  letter-spacing: calc((8ch - (12 * 0.7ch)) / 11);
+  white-space: nowrap;
+  overflow: visible !important;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  transform-origin: center center;
+}
+
+.span2 {
+  font-size: 0.28em;
+  text-transform: uppercase;
+  grid-column: 1 / 6;
+  letter-spacing: 0.03em;
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  transform-origin: left center;
+}
+
+.span3 {
+  font-size: 0.48em;
+  grid-column: 1 / 6;
+  letter-spacing: calc((5ch - (11 * 0.45ch)) / 10);
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  transform-origin: left center;
+}
+
+.span4 {
+  grid-column: 6 / 9;
+  grid-row: 2 / 4;
+  max-inline-size: 1.35em;
+  border-radius: 2px;
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  transform-origin: center center;
+}
+
+.span5 {
+  grid-column: 1 / 9;
+  text-transform: uppercase;
+  letter-spacing: 0.12em !important;
+  white-space: nowrap;
+  overflow: visible !important;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  transform-origin: center center;
+}
+
+.span6 {
+  font-size: 0.28em;
+  letter-spacing: 0.03em;
+  grid-column: 1 / 5;
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  transform-origin: left center;
+}
+
+.span7 {
+  grid-column: 1 / 5;
+  block-size: 0.35em;
+  max-inline-size: 1.85em;
+  border-radius: 2px;
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  transform-origin: center center;
+}
+
+.span8 {
+  font-size: 0.765em;
+  text-transform: uppercase;
+  grid-column: 5 / 9;
+  grid-row: 5 / 7;
+  letter-spacing: calc((4ch - (4 * 0.75ch)) / 3);
+  position: relative;
+  z-index: 1;
+  overflow: visible !important;
+  transform-origin: right center;
+}
+
+/* Stagger animations for spans */
+.textGrid.entering span,
+.textGrid.visible span {
+  animation: spanEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.textGrid.exiting span {
+  animation: spanExit 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+.span1 { animation-delay: 0.1s !important; }
+.span2 { animation-delay: 0.2s !important; }
+.span3 { animation-delay: 0.3s !important; }
+.span4 { animation-delay: 0.4s !important; }
+.span5 { animation-delay: 0.5s !important; }
+.span6 { animation-delay: 0.6s !important; }
+.span7 { animation-delay: 0.7s !important; }
+.span8 { animation-delay: 0.8s !important; }
+
+@keyframes spanEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) rotateX(-90deg) scale(0.8);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) rotateX(10deg) scale(1.05);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes spanExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) rotateX(-45deg) scale(0.8);
+    filter: blur(10px);
+  }
+}
+
+/* Hover effects for spans */
+.span1:hover,
+.span2:hover,
+.span3:hover,
+.span5:hover,
+.span6:hover,
+.span8:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.span4:hover,
+.span7:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .span1 {
+    letter-spacing: calc((8ch - (12 * 0.68ch)) / 11);
+  }
+
+  .span3 {
+    letter-spacing: calc((5ch - (11 * 0.43ch)) / 10);
+  }
+
+  .span5 {
+    letter-spacing: 0.1em !important;
+  }
+
+  .span8 {
+    letter-spacing: calc((4ch - (4 * 0.73ch)) / 3);
+  }
+}
+
+@media (max-width: 768px) {
+  .textGridContainer {
+    perspective: 500px;
+  }
+  
+  .span1 {
+    letter-spacing: calc((8ch - (12 * 0.66ch)) / 11);
+  }
+
+  .span3 {
+    letter-spacing: calc((5ch - (11 * 0.41ch)) / 10);
+  }
+
+  .span5 {
+    letter-spacing: 0.08em !important;
+  }
+
+  .span8 {
+    letter-spacing: calc((4ch - (4 * 0.71ch)) / 3);
+  }
+  
+  .textGrid.entering span,
+  .textGrid.visible span {
+    animation-duration: 0.6s;
+  }
+  
+  .textGrid.exiting span {
+    animation-duration: 0.4s;
+  }
+}
+
+@media (max-width: 480px) {
+  .textGridContainer {
+    perspective: 300px;
+  }
+  
+  .textGrid.entering span,
+  .textGrid.visible span {
+    animation: spanEntranceMobile 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+}
+
+@keyframes spanEntranceMobile {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Entry screen specific styles */
+.textGrid:has(.screen-0-text) .span5 {
+  text-transform: none !important;
+}
+
+/* Animation states */
+.textGrid[data-visible="true"] span {
+  opacity: 1;
+}
+
+.textGrid.animate-pulse span {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.textGrid.dark span {
+  color: var(--color-dark-green);
+}
+
+.textGrid.light span {
+  color: var(--color-cream);
+}
+
+.textGrid.orange span {
+  color: var(--color-orange);
+}

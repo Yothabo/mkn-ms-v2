@@ -1,0 +1,36 @@
+.dotPattern {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.dot.animated {
+  will-change: transform, opacity;
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    animation: none !important;
+  }
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+  .dotPattern {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 480px) {
+  .dotPattern {
+    transform: scale(0.8);
+  }
+}

@@ -1,0 +1,58 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { VitePWA } from 'vite-plugin-pwa'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['MKN.png'],
+      manifest: {
+        name: 'MKN Media',
+        short_name: 'MKN',
+        description: 'Real-time updates for MKN Religion events',
+        theme_color: '#0E4839',
+        background_color: '#0E4839',
+        display: 'standalone',
+        orientation: 'portrait',
+        scope: '/',
+        start_url: '/',
+        icons: [
+          {
+            src: 'MKN.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'MKN.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,png,svg}']
+      },
+      devOptions: {
+        enabled: false
+      }
+    })
+  ],
+  server: {
+    host: true,
+    port: 5173
+  },
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-swipeable'],
+          'lottie-vendor': ['@lottiefiles/dotlottie-react'],
+          'icon-vendor': ['react-icons/io']
+        }
+      }
+    }
+  }
+})

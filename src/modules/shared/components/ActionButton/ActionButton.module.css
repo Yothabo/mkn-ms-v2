@@ -1,0 +1,43 @@
+.actionButton {
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 0.8rem;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.5s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonIcon {
+  animation: subtlePulse 3.2s ease-in-out infinite;
+  transform: translateX(0);
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.05) translateX(2px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.05) translateX(-2px);
+    opacity: 0.9;
+  }
+}

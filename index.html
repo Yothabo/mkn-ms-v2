@@ -1,50 +1,125 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Basic Meta -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/react.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MKN Management System</title>
-    <script>
-      // Apply theme immediately to prevent flash - executed before any CSS loads
-      (function() {
-        try {
-          const savedTheme = localStorage.getItem('mkn-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-          document.documentElement.setAttribute('data-theme', theme);
-          document.documentElement.style.colorScheme = theme;
-        } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'light');
-          document.documentElement.style.colorScheme = 'light';
-        }
-      })();
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Primary Meta Tags -->
+    <title>MKN Media | Real-Time Updates for MKN Religion Events</title>
+    <meta name="title" content="MKN Media | Real-Time Updates for MKN Religion Events">
+    <meta name="description" content="Stay connected with real-time updates for MKN Religion events. Follow schedules, announcements, and live event information as it unfolds.">
+    <meta name="keywords" content="MKN Media, MKN Religion, real-time updates, event updates, live information, gatherings, announcements, community updates">
+    <meta name="author" content="MKN Media">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mknmedia.vercel.app/">
+    <meta property="og:title" content="MKN Media | Real-Time Updates for MKN Religion Events">
+    <meta property="og:description" content="Get real-time updates for MKN Religion events. Simple, clear, and built to keep everyone informed and aligned.">
+    <meta property="og:image" content="https://mknmedia.vercel.app/MKN.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MKN">
+    <meta property="og:site_name" content="MKN Media">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mknmedia.vercel.app/">
+    <meta property="twitter:title" content="MKN Media | Real-Time Updates for MKN Religion Events">
+    <meta property="twitter:description" content="Follow real-time updates and key information for MKN Religion events as they happen.">
+    <meta property="twitter:image" content="https://mknmedia.vercel.app/MKN.png">
+    <meta property="twitter:image:alt" content="MKN">
+
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+    
+    <!-- iOS PWA Configuration -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MKN Media">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#0E4839">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#0E4839" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E4839" media="(prefers-color-scheme: dark)">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/MKN.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/MKN.png" sizes="16x16">
+    <link rel="apple-touch-icon" href="/MKN.png">
+    <link rel="mask-icon" href="/MKN.png" color="#0E4839">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mknmedia.vercel.app/">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MKN Media",
+      "alternateName": "Muzi KaNkulunkulu Media",
+      "url": "https://mknmedia.vercel.app/",
+      "logo": "https://mknmedia.vercel.app/MKN.png",
+      "description": "Real-time event updates and announcements for MKN Religion."
+    }
     </script>
+
+    <!-- Critical CSS -->
     <style>
-      /* Critical CSS to prevent flash - applied immediately */
-      :root {
-        color-scheme: light dark;
-      }
-      
-      [data-theme='light'] {
-        color-scheme: light;
-      }
-      
-      [data-theme='dark'] {
-        color-scheme: dark;
-      }
-      
-      body {
+      html, body {
         margin: 0;
         padding: 0;
-        background-color: var(--color-background, #ffffff);
-        color: var(--color-text, #1a1a1a);
-        transition: background-color 0.3s ease, color 0.3s ease;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #0E4839;
+      }
+
+      #root {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
     </style>
   </head>
+
   <body>
+    <!-- Preloader for no-JS fallback -->
+    <noscript>
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0E4839; color: #FDFCE7; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; font-family: sans-serif;">
+        <img src="/MKN.png" alt="MKN" style="width: 120px; height: 120px; margin-bottom: 2rem; filter: brightness(0) invert(1);" />
+        <h1 style="font-size: 1.5rem; margin-bottom: 1rem; color: #FDFCE7;">MKN Media</h1>
+        <p style="font-size: 1rem; line-height: 1.5; color: #FDFCE7;">
+          Please enable JavaScript to view real-time MKN Religion event updates.
+        </p>
+      </div>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/app/main.tsx"></script>
+
+    <!-- Analytics Placeholder -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+    </script>
   </body>
 </html>

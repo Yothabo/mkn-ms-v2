@@ -1,8 +1,0 @@
-/* Auth Base Styles - Using Global CSS Variables Only */
-/* No hard-coded values - all variables from global CSS */
-
-/* Import split CSS files */
-@import './base.containers.css';
-@import './base.forms.css';
-@import './base.components.css';
-@import './base.responsive.css';

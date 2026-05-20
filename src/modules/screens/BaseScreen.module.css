@@ -1,0 +1,399 @@
+.screen {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* Direction classes */
+.next { /* Keep for JS */ }
+.prev { /* Keep for JS */ }
+.entering { /* Base entering class */ }
+.exiting { /* Base exiting class */ }
+
+/* Screen animations - Smoothened */
+.entering.next {
+  animation: screenEntranceNext 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.entering.prev {
+  animation: screenEntrancePrev 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.exiting.next {
+  animation: screenExitNext 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+.exiting.prev {
+  animation: screenExitPrev 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+/* Smoother screen keyframes with overlap */
+@keyframes screenEntranceNext {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0); /* Reduced from 60px */
+  }
+  20% {
+    opacity: 0.3; /* Faster fade start */
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes screenExitNext {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  80% {
+    opacity: 0.7; /* Stay visible longer */
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0); /* Reduced from -60px */
+  }
+}
+
+@keyframes screenEntrancePrev {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0); /* Reduced from -60px */
+  }
+  20% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes screenExitPrev {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0); /* Reduced from 60px */
+  }
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.5rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  will-change: transform, opacity;
+}
+
+/* Smoother content animations with better timing */
+.descriptionContainer {
+  margin: 2rem auto !important;
+  max-width: 600px !important;
+  width: 100% !important;
+  opacity: 0;
+  transform: translate3d(0, 8px, 0); /* Reduced movement */
+  animation: contentFadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards; /* Slightly longer delay */
+  will-change: transform, opacity;
+}
+
+.description {
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+  margin: 0 auto 1.5rem !important;
+  font-weight: 400 !important;
+  opacity: 0.9 !important;
+  text-align: center !important;
+  width: 100% !important;
+  color: inherit !important;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+  opacity: 0;
+  transform: translate3d(0, 8px, 0); /* Reduced movement */
+  animation: contentFadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards; /* Longer delay */
+  will-change: transform, opacity;
+}
+
+/* Much smoother content fade-in */
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  40% {
+    opacity: 0.4;
+    transform: translate3d(0, 2px, 0);
+  }
+  70% {
+    opacity: 0.8;
+    transform: translate3d(0, -1px, 0); /* Tiny overshoot */
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Modal styles */
+.modalOverlay {
+  background: var(--modal-bg-color, var(--color-dark-green));
+  border-radius: 16px;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 1000;
+  max-width: 500px;
+  width: 90vw;
+  max-height: 85vh;
+  height: auto;
+  min-height: 400px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(253, 252, 231, 0.3) transparent;
+  animation: modalEntrance 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.modalOverlay.exiting {
+  animation: modalExit 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes modalEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -15px, 0) scale(0.98); /* Reduced movement */
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes modalExit {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 15px, 0) scale(0.98); /* Reduced movement */
+  }
+}
+
+/* Smoother modal content animations */
+.modalHeader {
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  transform: translate3d(0, -3px, 0); /* Reduced */
+  animation: contentFadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+}
+
+.activitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.activityButton {
+  padding: 0.5rem 0.3rem;
+  font-size: 0.7rem;
+  border-radius: 6px;
+  text-align: center;
+  cursor: default;
+  opacity: 0;
+  transform: translate3d(0, 5px, 0); /* Reduced */
+  animation: contentFadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.activityButton:nth-child(1) { animation-delay: 0.15s; }
+.activityButton:nth-child(2) { animation-delay: 0.2s; }
+.activityButton:nth-child(3) { animation-delay: 0.25s; }
+.activityButton:nth-child(4) { animation-delay: 0.3s; }
+
+.sectionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.sectionCard {
+  padding: 0.8rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 140px;
+  opacity: 0;
+  transform: translate3d(0, 6px, 0); /* Reduced */
+  animation: contentFadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.sectionCard:nth-child(1) { animation-delay: 0.15s; }
+.sectionCard:nth-child(2) { animation-delay: 0.2s; }
+.sectionCard:nth-child(3) { animation-delay: 0.25s; }
+.sectionCard:nth-child(4) { animation-delay: 0.3s; }
+
+.sectionItem {
+  font-size: 0.7rem;
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+  position: relative;
+  padding-left: 0.8rem;
+  text-align: left !important;
+  width: 100%;
+  opacity: 0;
+  transform: translate3d(-3px, 0, 0); /* Reduced */
+  animation: slideInRight 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.storyContent {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  min-height: 300px;
+  opacity: 0;
+  animation: contentFadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s forwards;
+}
+
+.modalCloseContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(253, 252, 231, 0.1);
+  opacity: 0;
+  animation: contentFadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+}
+
+.modalCloseButton {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1px solid rgba(253, 252, 231, 0.3);
+  color: var(--modal-text-color, var(--color-cream));
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.modalCloseButton:hover {
+  background: rgba(253, 252, 231, 0.1);
+  border-color: rgba(253, 252, 231, 0.5);
+}
+
+.websiteFooter {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
+  animation: contentFadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1s forwards; /* Longest delay */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contentContainer {
+    padding: 0 1rem;
+  }
+  
+  .modalOverlay {
+    padding: 1rem;
+    width: 95vw;
+    max-height: 90vh;
+    min-height: 450px;
+  }
+  
+  .sectionCard {
+    min-height: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentContainer {
+    padding: 0 0.8rem;
+  }
+  
+  .description {
+    font-size: 0.85rem;
+  }
+  
+  .modalOverlay {
+    padding: 0.8rem;
+    max-height: 92vh;
+    min-height: 500px;
+  }
+  
+  .sectionCard {
+    min-height: 120px;
+  }
+  
+  .websiteFooter {
+    font-size: 0.7rem;
+    bottom: 1rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .screen,
+  .contentContainer,
+  .descriptionContainer,
+  .buttonWrapper,
+  .modalOverlay,
+  .modalHeader,
+  .activityButton,
+  .sectionCard,
+  .sectionItem,
+  .storyContent,
+  .modalCloseContainer,
+  .websiteFooter {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

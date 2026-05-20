@@ -180,7 +180,7 @@ npm run build
 ## Repository Links
 
 * v1 (Legacy): `https://github.com/Yothabo/MKN-ms`
-* v2 (Current): `https://github.com/Yothabo/mkn-ms-v2`
+* v2 (Current): `https://github.com/Yothabo/mknmedia`
 
 ---
 

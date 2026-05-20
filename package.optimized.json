@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "dev": "vite --config vite.config.optimized.ts",
+    "build": "tsc && vite build --config vite.config.optimized.ts",
+    "preview": "vite preview --config vite.config.optimized.ts",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directories --max-warnings 0",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx,scss}\"",
+    "optimize-images": "node scripts/optimize-images.js",
+    "analyze-bundle": "vite build --config vite.config.optimized.ts && open dist/stats.html",
+    "audit-performance": "lighthouse http://localhost:5173 --view --output=html --output-path=./dist/lighthouse-report.html"
+  },
+  "devDependencies": {
+    "@types/sharp": "^0.32.0",
+    "glob": "^10.3.10",
+    "lighthouse": "^11.6.0",
+    "rollup-plugin-visualizer": "^6.0.5",
+    "sharp": "^0.33.2",
+    "vite-plugin-compression": "^0.5.1"
+  }
+}

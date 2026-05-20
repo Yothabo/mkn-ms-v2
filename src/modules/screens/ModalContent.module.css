@@ -1,0 +1,78 @@
+/* Shared modal content styles */
+.modalContent {
+  padding: 1rem 0;
+}
+
+.modalGrid {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.modalSection {
+  background: rgba(253, 252, 231, 0.05);
+  border: 1px solid rgba(253, 252, 231, 0.1);
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.sectionTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.sectionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.listItem:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+.activityGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.activityButton {
+  background: rgba(253, 252, 231, 0.1);
+  border: 1px solid rgba(253, 252, 231, 0.2);
+  border-radius: 4px;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .activityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .modalGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) {
+  .modalGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

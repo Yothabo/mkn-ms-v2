@@ -1,0 +1,81 @@
+.swipeEffectsContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10001;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: opacity 0.2s ease;
+}
+
+/* Square particles */
+.particle.square {
+  border-radius: 2px;
+}
+
+/* Diamond particles */
+.particle.diamond {
+  border-radius: 0;
+  transform-origin: center;
+}
+
+/* Circle particles (default) */
+.particle.circle {
+  border-radius: 50%;
+}
+
+/* Dot particles (very small circles) */
+.particle.dot {
+  border-radius: 50%;
+}
+
+.greenParticle {
+  box-shadow: 0 0 4px rgba(40, 54, 24, 0.3);
+}
+
+/* REMOVED: All direction indicator styles (.directionIndicator) */
+
+/* REMOVED: All wave effect styles (.waveEffect) */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .particle {
+    animation: none !important;
+    transition: none !important;
+    display: none;
+  }
+
+  .swipeEffectsContainer {
+    display: none;
+  }
+}
+
+/* Performance optimizations for high particle count */
+@media (max-width: 768px) {
+  /* Reduce max particles on mobile */
+  .swipeEffectsContainer {
+    max-particles: 80;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce on very small screens */
+  .swipeEffectsContainer {
+    max-particles: 60;
+  }
+}
+
+/* Performance hint for browsers */
+@media (prefers-reduced-transparency: reduce) {
+  .particle {
+    opacity: 0.9 !important;
+  }
+}

@@ -1,0 +1,36 @@
+:root {
+  /* Primary colors */
+  --color-dark-green: #0E4839;
+  --color-cream: #FDFCE7;
+  --color-orange: #ed8f4c;
+  --color-orange-light: #FFA500;
+  --color-dark-green-alt: #1a472a;
+
+  /* Enhanced dot colors for better visibility */
+  --color-dot-on-dark: rgba(255, 255, 255, 0.45);    /* Much brighter on dark green */
+  --color-dot-on-cream: rgba(30, 30, 30, 0.3);       /* Darker on cream */
+  --color-dot-on-orange: rgba(255, 255, 255, 0.5);   /* Brighter on orange */
+  
+  /* Shape colors - same for all shapes */
+  --color-dot-primary: rgba(180, 180, 180, 0.6);     /* Default high visibility grey */
+  --color-dot-secondary: rgba(200, 200, 200, 0.5);   /* Slightly different tone */
+
+  /* RGB values for opacity mixing */
+  --color-dark-green-rgb: 14, 72, 57;
+  --color-cream-rgb: 253, 252, 231;
+  --color-orange-rgb: 237, 143, 76;
+
+  /* Opacity variations */
+  --color-dark-green-10: rgba(var(--color-dark-green-rgb), 0.1);
+  --color-dark-green-20: rgba(var(--color-dark-green-rgb), 0.2);
+  --color-dark-green-50: rgba(var(--color-dark-green-rgb), 0.5);
+  --color-cream-10: rgba(var(--color-cream-rgb), 0.1);
+  --color-cream-20: rgba(var(--color-cream-rgb), 0.2);
+  --color-cream-50: rgba(var(--color-cream-rgb), 0.5);
+  --color-cream-70: rgba(var(--color-cream-rgb), 0.7);
+  --color-orange-10: rgba(var(--color-orange-rgb), 0.1);
+  --color-orange-20: rgba(var(--color-orange-rgb), 0.2);
+  --color-orange-50: rgba(var(--color-orange-rgb), 0.5);
+  --color-orange-80: rgba(var(--color-orange-rgb), 0.8);
+  --color-orange-90: rgba(var(--color-orange-rgb), 0.9);
+}

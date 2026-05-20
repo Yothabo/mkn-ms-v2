@@ -1,6 +1,0 @@
-/* Verification Modal OTP Styles */
-
-/* Import split OTP styles */
-@import './VerificationModal.otp.layout.css';
-@import './VerificationModal.otp.input.css';
-@import './VerificationModal.otp.actions.css';

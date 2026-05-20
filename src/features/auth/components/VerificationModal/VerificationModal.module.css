@@ -1,9 +1,0 @@
-/* Verification Modal Styles */
-
-/* Import split styles */
-@import './VerificationModal.layout.css';
-@import './VerificationModal.methods.css';
-@import './VerificationModal.otp.css';
-@import './VerificationModal.states.css';
-@import './VerificationModal.components.css';
-@import './VerificationModal.responsive.css';
